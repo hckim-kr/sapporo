@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2027 SAPPORO : Winter Escape with My Love ❄️</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Pretendard Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'sans-serif'],
+          },
+          colors: {
+            snow: {
+              50: '#f8fafc',
+              100: '#f0f7ff',
+              200: '#e0f0fe',
+              300: '#bae2fd',
+              500: '#0284c7',
+              700: '#0369a1',
+              900: '#0c4a6e',
+            },
+            sapporo: {
+              night: '#0a192f',
+              accent: '#38bdf8',
+              gold: '#fbbf24',
+              crimson: '#ef4444',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Pretendard', sans-serif;
+      scroll-behavior: smooth;
+    }
+    .glass-nav {
+      background: rgba(10, 25, 47, 0.9);
+      backdrop-filter: blur(12px);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
+    }
+    .pill-cash {
+      background-color: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fca5a5;
+    }
+    .pill-card {
+      background-color: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #7dd3fc;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <header class="sticky top-0 z-50 glass-nav border-b border-slate-700/50 text-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl animate-pulse">❄️</span>
+        <div>
+          <h1 class="font-extrabold text-base sm:text-lg tracking-tight bg-gradient-to-r from-sky-200 via-white to-sky-300 bg-clip-text text-transparent">
+            2027 SAPPORO
+          </h1>
+          <p class="text-[10px] text-sky-300/80 -mt-0.5">Winter Escape with My Love</p>
+        </div>
+      </div>
+      <!-- Tab Navigation Buttons -->
+      <nav class="flex items-center gap-1 sm:gap-2">
+        <button onclick="switchTab('itinerary')" id="btn-tab-itinerary" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition bg-sky-500 text-white shadow-sm">
+          🗓️ 상세 일정
+        </button>
+        <button onclick="switchTab('restaurants')" id="btn-tab-restaurants" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition text-slate-300 hover:text-white hover:bg-slate-800/60">
+          💳 결제·맛집
+        </button>
+        <button onclick="switchTab('budget')" id="btn-tab-budget" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition text-slate-300 hover:text-white hover:bg-slate-800/60">
+          💰 최종 예산표
+        </button>
+        <button onclick="switchTab('checklist')" id="btn-tab-checklist" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition text-slate-300 hover:text-white hover:bg-slate-800/60">
+          📌 핵심 팁
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="bg-gradient-to-b from-sapporo-night via-slate-900 to-slate-800 text-white pt-10 pb-12 px-4 sm:px-6 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:20px_20px]"></div>
+    
+    <div class="max-w-6xl mx-auto relative z-10 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/20 border border-sky-400/30 text-sky-300 text-xs font-semibold mb-3">
+        <span>✨</span> 4박 5일 부부 로맨틱 설경 & 논알콜 미식 투어
+      </div>
+      <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white mb-2">
+        낭만 설경과 미식의 삿포로 4박 5일
+      </h2>
+      <p class="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto mb-6 leading-relaxed">
+        생양고기 본즈 예약 • 다이마루 백화점 오픈런 • 오타루 수족관 펭귄 산책 • 비에이 설경 투어 • 스아게 스프카레
+      </p>
+
+      <!-- Key Trip Info Badges -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto text-left">
+        <div class="bg-white/5 border border-white/10 p-3 rounded-xl">
+          <p class="text-[11px] text-sky-300 font-medium">🗓️ 여행 기간</p>
+          <p class="text-xs sm:text-sm font-bold text-white mt-0.5">2027.01.26 ~ 01.30</p>
+          <span class="text-[10px] text-slate-400">화요일 ~ 토요일 (4박 5일)</span>
+        </div>
+        <div class="bg-white/5 border border-white/10 p-3 rounded-xl">
+          <p class="text-[11px] text-sky-300 font-medium">✈️ 확정 항공편</p>
+          <p class="text-xs sm:text-sm font-bold text-white mt-0.5">출발 07:40 → 10:20</p>
+          <span class="text-[10px] text-emerald-400">2인 40.9만 원 특가 확보</span>
+        </div>
+        <div class="bg-white/5 border border-white/10 p-3 rounded-xl">
+          <p class="text-[11px] text-sky-300 font-medium">🏨 숙소 (조식 포함 확정)</p>
+          <p class="text-xs sm:text-sm font-bold text-white mt-0.5">베셀 캄파나 스스키노</p>
+          <span class="text-[10px] text-slate-400">카이센동 뷔페 & 대욕장 온천</span>
+        </div>
+        <div class="bg-white/5 border border-white/10 p-3 rounded-xl">
+          <p class="text-[11px] text-sky-300 font-medium">💵 현금 인출 계획</p>
+          <p class="text-xs sm:text-sm font-bold text-white mt-0.5">공항 ATM 30,000엔</p>
+          <span class="text-[10px] text-slate-400">교통카드 1.1만 + 숙박세 + 맛집</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full space-y-8">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: 5일 상세 일정 (ITINERARY) -->
+    <!-- ========================================== -->
+    <section id="tab-content-itinerary" class="tab-pane space-y-6">
+      
+      <!-- Day Quick Filter Tabs -->
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">📅</span>
+          <h3 class="text-lg font-bold text-slate-900">일차별 세부 타임라인</h3>
+        </div>
+        <div class="flex items-center gap-1 overflow-x-auto no-scrollbar py-1" id="dayFilterGroup">
+          <button onclick="filterDayCards('all')" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-slate-800 text-white">전체</button>
+          <button onclick="filterDayCards('1')" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">1일차</button>
+          <button onclick="filterDayCards('2')" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">2일차</button>
+          <button onclick="filterDayCards('3')" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">3일차</button>
+          <button onclick="filterDayCards('4')" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">4일차</button>
+          <button onclick="filterDayCards('5')" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">5일차</button>
+        </div>
+      </div>
+
+      <!-- Day 1 Card -->
+      <div class="day-card glass-card rounded-2xl p-5 border border-slate-200 border-l-4 border-l-sky-500 space-y-4" data-day="1">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-3">
+            <span class="px-2.5 py-1 bg-sky-100 text-sky-800 text-xs font-extrabold rounded-md">Day 1</span>
+            <span class="text-sm font-semibold text-slate-500">2027.01.26 (화)</span>
+            <h4 class="text-base font-bold text-slate-900">시내 사전 쇼핑 & 생양고기 본즈 예약 & 심야 라멘</h4>
+          </div>
+          <span class="text-xs font-semibold text-sky-700 bg-sky-50 border border-sky-200 px-2.5 py-1 rounded-md">
+            입국·이동 여유 확보 • 징기스칸 18:00 예약
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <!-- Morning -->
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+            <div class="space-y-2">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오전 (10:20 ~)</span>
+              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+                <li>• <strong>10:20 신치토세 공항 도착</strong> 및 입국 수속</li>
+                <li>• 입국 수속 후 세븐뱅크 ATM에서 <strong>필요 현금 출금</strong> (30,000엔은 예산안 기준)</li>
+                <li>• 이코카·파스모 각 5,000엔 충전은 실제 교통비 계획에 맞춰 조정</li>
+              </ul>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-slate-200">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800">🍛 [중식] 스프카레 라비</span>
+                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0.5">입국 수속·ATM·교통카드 충전 후 공항에서 식사. 대기 상황에 따라 메뉴/시간 조정</p>
+            </div>
+          </div>
+
+          <!-- Afternoon -->
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+            <div class="space-y-2">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오후 (13:30 ~ 17:30 · 유동 일정)</span>
+              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+                <li>• 점심 후 JR 이동 → 숙소에는 우선 짐 보관 (도착 시각은 입국·식사 대기에 따라 변동)</li>
+                <li>• 체크인 가능 시각 확인 후 체크인, 숙박세 2,400엔은 호텔에 금액 재확인 후 현금 지불</li>
+                <li>• 14:30 이후 여유가 되면 <strong>휴먼메이드 & 스투시</strong> 방문 (첫날 쇼핑은 선택 일정)</li>
+                <li>• 시간이 남으면 사츠도라(간이 아이젠) 및 모유크 삿포로 방문</li>
+              </ul>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-slate-200">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800">🥧 [간식] 키노토야 베이크</span>
+                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0.5">지하상가 폴타운 갓 구운 치즈타르트</p>
+            </div>
+          </div>
+
+          <!-- Evening & Night -->
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+            <div class="space-y-2">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">저녁 & 심야 야식</span>
+              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+                <li>• 18:00 예약 맞춰 입장해 대기 없이 따뜻하게 식사</li>
+                <li>• 식후 오도리 공원 & 삿포로 TV타워 눈 덮인 야경 산책</li>
+                <li>• 숙소 휴식 후 밤 21:30 스스키노 밤거리 산책</li>
+              </ul>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-slate-200 space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800">🥩 [석식] 아라타나루 본즈 (18:00 예약)</span>
+                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800">🍜 [야식] 라멘신겐 (에치고+차한)</span>
+                <span class="pill-cash px-2 py-0.5 rounded text-[10px] font-bold">현금 필수</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 2 Card -->
+      <div class="day-card glass-card rounded-2xl p-5 border border-slate-200 border-l-4 border-l-emerald-500 space-y-4" data-day="2">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-3">
+            <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-md">Day 2</span>
+            <span class="text-sm font-semibold text-slate-500">2027.01.27 (수)</span>
+            <h4 class="text-base font-bold text-slate-900">다이마루 오픈런, 몽벨 & 카페 휴식, 츠바메야 와규 & 모이와산 야경</h4>
+          </div>
+          <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-md">
+            실내 쇼핑 & 쾌적한 와규 식사
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <!-- Morning -->
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+            <div class="space-y-2">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오전 (조식 후 10:00 오픈 목표)</span>
+              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+                <li>• 호텔 조식은 가능하면 08:00 전후로 앞당겨 09:00 전후 마무리</li>
+                <li>• 이동 시간을 고려해 삿포로역 도착 후 <strong>10:00 다이마루 백화점 오픈</strong> 맞추기 (조식 지연 시 쇼핑 시작 조정)</li>
+                <li>• [B1F] <strong>生노스망</strong> 앙크림 파이 픽업</li>
+                <li>• [스텔라 6F] <strong>네무로 하나마루</strong> 번호표 수령 가능 여부·대기 방식 확인</li>
+              </ul>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-slate-200">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800">👜 [쇼핑] 셀린느(Celine) 지갑</span>
+                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0.5">면세/환급 가능 여부와 필요 영수증·절차를 매장에서 확인</p>
+            </div>
+          </div>
+
+          <!-- Afternoon -->
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+            <div class="space-y-2">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오후 (11:30 ~ 16:00)</span>
+              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+                <li>• 회전초밥 <strong>네무로 하나마루</strong> 점심 식사</li>
+                <li>• <strong>치카호(지하보행로)</strong> 따라 따뜻하게 남쪽 이동</li>
+                <li>• 홋카이도청 구 본청사 설경 & <strong>몽벨 아카렌가점</strong> 구경</li>
+                <li>• <strong>Roquefort Cafe</strong>에서 커피 & 치즈케이크 휴식</li>
+              </ul>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-slate-200">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800">☕ [카페] Roquefort Cafe</span>
+                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드/현금</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0.5">분위기 좋은 핸드드립 로스터리 명소</p>
+            </div>
+          </div>
+
+          <!-- Evening -->
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+            <div class="space-y-2">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">저녁 & 밤 (16:00 ~)</span>
+              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+                <li>• 16:30 일몰에 맞춰 <strong>모이와산 로프웨이</strong> 탑승</li>
+                <li>• 일본 3대 야경 정상 파노라마 설경 감상</li>
+                <li>• 스스키노 숙소 인근으로 복귀해 쾌적한 와규 식사</li>
+              </ul>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-slate-200 space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800">🥩 [석식] 츠바메야 (燕屋)</span>
+                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800">🍨 [디저트] 파르페, 커피, 술, 사토</span>
+                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 3 Card -->
+      <div class="day-card glass-card rounded-2xl p-5 border border-slate-200 border-l-4 border-l-amber-500 space-y-4" data-day="3">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-3">
+            <span class="px-2.5 py-1 bg-amber-100 text-amber-800 text-xs font-extrabold rounded-md">Day 3</span>
+            <span class="text-sm font-semibold text-slate-500">2027.01.28 (목)</span>
+            <h4 class="text-base font-bold text-slate-900">비에이 & 후라노 늦출 버스투어 & 스아게 본점</h4>
+          </div>
+          <span class="text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-md">
+            설경 투어 • 스아게 본점 스프카레
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <!-- Morning -->
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+            <div class="space-y-2">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오전 (09:30 출발)</span>
+              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+                <li>• 조식 후 출발 준비. 투어 집결 시각·장소와 조식 운영 시간을 전날 재확인</li>
+                <li>• 09:30 삿포로역 집결 후 비에이행 전용 버스 탑승</li>
+                <li>• 세븐스타 나무 & 패치워크 로드 눈꽃 드라이브</li>
+              </ul>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-slate-200">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800">🍤 [중식] 비에이 준페이 (Junpei)</span>
+                <span class="pill-cash px-2 py-0.5 rounded text-[10px] font-bold">현금 필수</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0.5">투어 요금에 식사가 포함되는지 사전 확인. 미포함이면 현지 식비·현금 예산에 반영</p>
+            </div>
+          </div>
+
+          <!-- Afternoon -->
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+            <div class="space-y-2">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오후 설경 명소</span>
+              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+                <li>• <strong>크리스마스트리</strong> 단독 눈밭 포토존</li>
+                <li>• <strong>탁신관 자작나무 숲길</strong> 고요한 산책</li>
+                <li>• 푸른 물빛이 신비로운 <strong>흰수염폭포</strong> 관람</li>
+                <li>• 후라노 <strong>닝구르테라스</strong> 통나무 요정마을 야경</li>
+              </ul>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-slate-200">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800">🥛 [간식] 츄츄의 집 야키밀크</span>
+                <span class="pill-cash px-2 py-0.5 rounded text-[10px] font-bold">현금 필수</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0.5">눈 내리는 숲속 오두막에서 마시는 따뜻한 구운 우유</p>
+            </div>
+          </div>
+
+          <!-- Evening -->
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+            <div class="space-y-2">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">저녁 삿포로 복귀 (20:30 ~)</span>
+              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+                <li>• 버스에서 휴식하며 삿포로 스스키노 복귀</li>
+                <li>• 도로·기상 상황에 따라 복귀가 늦어질 수 있으므로 저녁은 유동 일정으로 운영</li>
+                <li>• 숙소(베셀 캄파나) 도보 5분 거리라 복귀 매우 편리</li>
+              </ul>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-slate-200">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800">🍛 [석식 후보] 스아게 플러스 (Suage+) 본점</span>
+                <span class="pill-cash px-2 py-0.5 rounded text-[10px] font-bold">현금 필수</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0.5">방문 당일 영업 종료·라스트오더를 확인하고, 늦으면 숙소 인근 대체 식당으로 변경</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 4 Card -->
+      <div class="day-card glass-card rounded-2xl p-5 border border-slate-200 border-l-4 border-l-violet-500 space-y-4" data-day="4">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-3">
+            <span class="px-2.5 py-1 bg-violet-100 text-violet-800 text-xs font-extrabold rounded-md">Day 4</span>
+            <span class="text-sm font-semibold text-slate-500">2027.01.29 (금)</span>
+            <h4 class="text-base font-bold text-slate-900">오타루 펭귄 산책, 디저트 로드 & 원조 라멘요코초</h4>
+          </div>
+          <span class="text-xs font-semibold text-violet-700 bg-violet-50 border border-violet-200 px-2.5 py-1 rounded-md">
+            수족관 2타임 관람 • 로쿠미안 부타동
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <!-- Morning Aquarium -->
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+            <div class="space-y-2">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오전 (09:00 ~ 13:30)</span>
+              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+                <li>• JR 열차로 <strong>'오타루역'</strong> 하차 (※미나미오타루 아님)</li>
+                <li>• 3번 홈 버스 탑승 → 오타루 수족관 이동</li>
+                <li>• 🐧 <strong>11:30 [1차] 펭귄의 눈 속 산책</strong> 관람</li>
+                <li>• 🐧 <strong>12:40 [2차] 펭귄의 눈 속 산책</strong> 추가 관람</li>
+              </ul>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-slate-200">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800">🎟️ [입장료] 오타루 수족관</span>
+                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0.5">2인 약 2,600엔 (버스비는 IC카드 태그)</p>
+            </div>
+          </div>
+
+          <!-- Afternoon Otaru Walk -->
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+            <div class="space-y-2">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오후 (14:00 ~ 17:30)</span>
+              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+                <li>• 시내 복귀 후 로컬 부타동으로 늦은 점심</li>
+                <li>• 오르골당 본관, 사카이마치 상점가 유리공예 감상</li>
+                <li>• <strong>르타오 본점</strong> (더블프로마쥬 치즈케이크)</li>
+                <li>• <strong>키타카로</strong> (대왕 슈크림) & <strong>카마에이</strong> (팡롤 어묵)</li>
+              </ul>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-slate-200">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800">🍖 [중식] 로쿠미안 (六味庵)</span>
+                <span class="pill-cash px-2 py-0.5 rounded text-[10px] font-bold">현금 필수</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0.5">불향 가득한 숯불 부타동 노포 (14:30 주문 마감)</p>
+            </div>
+          </div>
+
+          <!-- Evening -->
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+            <div class="space-y-2">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">저녁 & 쇼핑 (18:00 ~)</span>
+              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+                <li>• <strong>오타루 운하</strong> 가스등 켜진 야경 산책 후 JR 복귀</li>
+                <li>• 스스키노 <strong>'원조 라멘요코초'</strong> 골목 탐방</li>
+                <li>• 호텔 앞 <strong>메가 돈키호테</strong> 귀국 전 면세 쇼핑 및 짐 패킹</li>
+              </ul>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-slate-200">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800">🍜 [석식] 테시카가 라멘</span>
+                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0.5">라멘요코초 내 옥수수 콘버터 미소라멘 명가</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 5 Card -->
+      <div class="day-card glass-card rounded-2xl p-5 border border-slate-200 border-l-4 border-l-cyan-500 space-y-4" data-day="5">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-3">
+            <span class="px-2.5 py-1 bg-cyan-100 text-cyan-800 text-xs font-extrabold rounded-md">Day 5</span>
+            <span class="text-sm font-semibold text-slate-500">2027.01.30 (토)</span>
+            <h4 class="text-base font-bold text-slate-900">공항 세관 텍스 리펀 & 아쉬운 귀국</h4>
+          </div>
+          <span class="text-xs font-semibold text-rose-700 bg-rose-50 border border-rose-200 px-2.5 py-1 rounded-md">
+            ⚠️ 텍스 리펀 수속 필수 (수하물 부치기 전)
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 space-y-2">
+            <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오전 삿포로 체크아웃</span>
+            <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+              <li>• 07:00 호텔 조식 뷔페 (마지막 셀프 카이센동 식사)</li>
+              <li>• 08:30 체크아웃 후 삿포로역 이동</li>
+              <li>• 08:45 JR 쾌속 에어포트 탑승 → 09:30~09:40 신치토세 공항 도착</li>
+            </ul>
+          </div>
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 space-y-2">
+            <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">공항 수속 & 귀국</span>
+            <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+              <li>• <strong>[필수] 위탁 수하물 처리 전에 세관 확인 절차 진행</strong>. 환급 대상·환급액은 매장 및 구매 조건에 따라 달라짐</li>
+              <li>• 위탁 수하물 위탁 및 출국 심사</li>
+              <li>• 귀국편 실제 출발 시각과 항공사 수속 마감 시간을 확인해 공항 도착·JR 시간을 역산. 12:00~13:00는 현재 계획값이므로 발권 후 수정</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: 결제 수단 & 맛집 디렉토리 -->
+    <!-- ========================================== -->
+    <section id="tab-content-restaurants" class="tab-pane hidden space-y-6">
+      <div class="border-b border-slate-200 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xl">💳</span>
+            <h3 class="text-lg font-bold text-slate-900">식당·간식 결제 수단 & 평점 디렉토리</h3>
+          </div>
+          <p class="text-xs text-slate-500 mt-0.5">구글 평점 4.0 이상 검증된 맛집의 결제 방식(현금/카드)과 꿀팁을 확인하세요.</p>
+        </div>
+        <!-- Filter Buttons -->
+        <div class="flex items-center gap-1.5">
+          <button onclick="filterPayment('all')" class="pay-filter-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-slate-800 text-white">전체</button>
+          <button onclick="filterPayment('cash')" class="pay-filter-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100">현금 필수만 ⚠️</button>
+          <button onclick="filterPayment('card')" class="pay-filter-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100">카드 가능 ⭕</button>
+        </div>
+      </div>
+
+      <!-- Restaurant Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="restaurantGrid">
+        
+        <!-- 1. 아라타나루 본즈 -->
+        <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="card">
+          <div class="flex items-center justify-between">
+            <h5 class="font-bold text-sm text-slate-900">아라타나루 본즈 스스키노 본점</h5>
+            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 가능</span>
+          </div>
+          <p class="text-xs text-emerald-600 font-semibold">⭐ 4.6 (리뷰 약 800개) • 1일차 18:00 사전 예약</p>
+          <p class="text-xs text-slate-600 leading-snug">
+            다루마 대비 환기와 위생이 뛰어나며 잡내 없는 고급 냉장 생양고기(생 숄더로스, 램찹) 전문점. 추위 없이 입장 가능.
+          </p>
+        </div>
+
+        <!-- 2. 라멘신겐 -->
+        <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="cash">
+          <div class="flex items-center justify-between">
+            <h5 class="font-bold text-sm text-slate-900">라멘신겐 (Ramen Shingen)</h5>
+            <span class="pill-cash px-2 py-0.5 rounded text-[10px] font-bold">현금 필수 ⚠️</span>
+          </div>
+          <p class="text-xs text-amber-600 font-semibold">⭐ 4.2 (리뷰 약 6,500개) • 1일차 21:30 심야 야식</p>
+          <p class="text-xs text-slate-600 leading-snug">
+            현지인 웨이팅 1티어 미소라멘. 진한 에치고 라멘과 불맛 차한(볶음밥) 세트 조합 필수. 숙소 도보 6분 거리.
+          </p>
+        </div>
+
+        <!-- 3. 네무로 하나마루 -->
+        <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="card">
+          <div class="flex items-center justify-between">
+            <h5 class="font-bold text-sm text-slate-900">네무로 하나마루 (스텔라 6F)</h5>
+            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 가능</span>
+          </div>
+          <p class="text-xs text-emerald-600 font-semibold">⭐ 4.3 (리뷰 약 4,200개) • 2일차 점심</p>
+          <p class="text-xs text-slate-600 leading-snug">
+            홋카이도 최고 인기 회전초밥. 오전 10:15 현장 번호표 발권 후 다이마루 백화점 쇼핑하고 입장하는 꿀동선.
+          </p>
+        </div>
+
+        <!-- 4. 츠바메야 -->
+        <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="card">
+          <div class="flex items-center justify-between">
+            <h5 class="font-bold text-sm text-slate-900">츠바메야 (燕屋) 스스키노</h5>
+            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 가능</span>
+          </div>
+          <p class="text-xs text-emerald-600 font-semibold">⭐ 4.2 (리뷰 약 900개) • 2일차 저녁</p>
+          <p class="text-xs text-slate-600 leading-snug">
+            스스키노 중심, 숙소 인근 와규 야키니쿠. 주류 강요 없이 쾌적한 룸/칸막이석에서 소고기 식사에 집중 가능.
+          </p>
+        </div>
+
+        <!-- 5. 파르페, 커피, 술, 사토 -->
+        <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="card">
+          <div class="flex items-center justify-between">
+            <h5 class="font-bold text-sm text-slate-900">파르페, 커피, 술, 사토 (佐藤)</h5>
+            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 가능</span>
+          </div>
+          <p class="text-xs text-emerald-600 font-semibold">⭐ 4.1 (리뷰 약 2,300개) • 2일차 밤 디저트</p>
+          <p class="text-xs text-slate-600 leading-snug">
+            삿포로 시메파르페 문화를 대표하는 곳. 소금 카라멜 피스타치오 파르페 & 드립 커피 페어링 추천 (무알콜).
+          </p>
+        </div>
+
+        <!-- 6. 비에이 준페이 -->
+        <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="cash">
+          <div class="flex items-center justify-between">
+            <h5 class="font-bold text-sm text-slate-900">비에이 준페이 (Junpei)</h5>
+            <span class="pill-cash px-2 py-0.5 rounded text-[10px] font-bold">현금 필수 ⚠️</span>
+          </div>
+          <p class="text-xs text-amber-600 font-semibold">⭐ 4.2 (리뷰 약 2,600개) • 3일차 투어 점심</p>
+          <p class="text-xs text-slate-600 leading-snug">
+            해외 신용카드 결제 불가 (현금만 가능). 바삭한 대왕 에비동(새우튀김덮밥). 2인 약 3,200~3,600엔 현금 지참.
+          </p>
+        </div>
+
+        <!-- 7. 닝구르테라스 츄츄의 집 -->
+        <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="cash">
+          <div class="flex items-center justify-between">
+            <h5 class="font-bold text-sm text-slate-900">닝구르테라스 츄츄의 집 (야키밀크)</h5>
+            <span class="pill-cash px-2 py-0.5 rounded text-[10px] font-bold">현금 필수 ⚠️</span>
+          </div>
+          <p class="text-xs text-amber-600 font-semibold">⭐ 4.0 (리뷰 약 600개) • 3일차 투어 간식</p>
+          <p class="text-xs text-slate-600 leading-snug">
+            숲속 통나무 오두막 카페로 카드 단말기 없음. 표면을 달콤하게 토치한 '구운 우유' 2잔 약 1,200엔 현금 준비.
+          </p>
+        </div>
+
+        <!-- 8. 스아게 플러스 본점 -->
+        <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="cash">
+          <div class="flex items-center justify-between">
+            <h5 class="font-bold text-sm text-slate-900">스아게 플러스 (Suage+) 본점</h5>
+            <span class="pill-cash px-2 py-0.5 rounded text-[10px] font-bold">현금 필수 ⚠️</span>
+          </div>
+          <p class="text-xs text-amber-600 font-semibold">⭐ 4.2 (리뷰 약 4,800개) • 3일차 저녁</p>
+          <p class="text-xs text-slate-600 leading-snug">
+            해외 카드 불가(현금 전용). 삿포로 3대 스프카레. 닭다리/채소 꼬치와 맑고 깊은 육수. 숙소 도보 5분 거리.
+          </p>
+        </div>
+
+        <!-- 9. 오타루 로쿠미안 -->
+        <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="cash">
+          <div class="flex items-center justify-between">
+            <h5 class="font-bold text-sm text-slate-900">오타루 로쿠미안 (六味庵)</h5>
+            <span class="pill-cash px-2 py-0.5 rounded text-[10px] font-bold">현금 필수 ⚠️</span>
+          </div>
+          <p class="text-xs text-amber-600 font-semibold">⭐ 4.3 (리뷰 약 650개) • 4일차 오타루 점심</p>
+          <p class="text-xs text-slate-600 leading-snug">
+            현지인들이 줄 서는 숯불 부타동 노포. 카드 결제 미지원. 14:30 라스트 오더 주의 (2인 약 2,000엔 현금 준비).
+          </p>
+        </div>
+
+        <!-- 10. 라멘요코초 테시카가 -->
+        <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="card">
+          <div class="flex items-center justify-between">
+            <h5 class="font-bold text-sm text-slate-900">라멘요코초 '테시카가 라멘'</h5>
+            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 가능</span>
+          </div>
+          <p class="text-xs text-emerald-600 font-semibold">⭐ 4.3 (리뷰 약 1,900개) • 4일차 저녁</p>
+          <p class="text-xs text-slate-600 leading-snug">
+            원조 라멘요코초 골목 내 키오스크 카드 결제 지원 매장. 구수한 된장 육수에 홋카이도 콘버터 토핑 강추.
+          </p>
+        </div>
+
+        <!-- 11. 르타오 & 키타카로 & 카마에이 -->
+        <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="card">
+          <div class="flex items-center justify-between">
+            <h5 class="font-bold text-sm text-slate-900">오타루 디저트 (르타오/키타카로/카마에이)</h5>
+            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 가능</span>
+          </div>
+          <p class="text-xs text-emerald-600 font-semibold">⭐ 4.3 ~ 4.4 • 4일차 오후 디저트 로드</p>
+          <p class="text-xs text-slate-600 leading-snug">
+            르타오 치즈케이크, 키타카로 대왕 슈크림, 카마에이 팡롤 어묵 모두 트래블로그 카드로 편리하게 결제 가능.
+          </p>
+        </div>
+
+        <!-- 12. 스프카레 라비 & 키노토야 -->
+        <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="card">
+          <div class="flex items-center justify-between">
+            <h5 class="font-bold text-sm text-slate-900">공항 라비 & 키노토야 베이크</h5>
+            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 가능</span>
+          </div>
+          <p class="text-xs text-emerald-600 font-semibold">⭐ 4.1 ~ 4.3 • 1일차 공항/지하상가</p>
+          <p class="text-xs text-slate-600 leading-snug">
+            신치토세 공항 3층 라비와 스스키노 지하상가 폴타운 키노토야는 모두 신용카드 결제를 100% 지원합니다.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: 최종 예산표 (BUDGET) -->
+    <!-- ========================================== -->
+    <section id="tab-content-budget" class="tab-pane hidden space-y-6">
+      <div class="border-b border-slate-200 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xl">💰</span>
+            <h3 class="text-lg font-bold text-slate-900">4박 5일 2인 최종 여행 예산표</h3>
+          </div>
+          <p class="text-xs text-slate-500 mt-0.5">매몰 수수료 18만 원과 조식 포함 숙소가 반영되었습니다. 귀국편·투어는 예정 금액이며, 환급 전 총액을 기준으로 예산을 준비하세요.</p>
+        </div>
+        <div class="text-right">
+          <span class="text-xs text-slate-500">예상 실부담액:</span>
+          <span class="text-base sm:text-lg font-extrabold text-sky-700">환급 전 약 390만 ~ 413만 원</span>
+        </div>
+      </div>
+
+      <!-- Budget 3-Card Summary Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="glass-card p-4 rounded-xl border border-sky-200 bg-sky-50/40">
+          <p class="text-xs font-bold text-sky-800">사전 확정 + 예정 고정비</p>
+          <p class="text-2xl font-black text-slate-900 mt-1">2,099,561원</p>
+          <p class="text-[11px] text-slate-500 mt-1">항공권(수수료 18만 포함) + 베셀 4박(조식) + 투어</p>
+        </div>
+        <div class="glass-card p-4 rounded-xl border border-amber-200 bg-amber-50/40">
+          <p class="text-xs font-bold text-amber-800">현지 결제 필요액 (소비세 10% 포함)</p>
+          <p class="text-2xl font-black text-slate-900 mt-1">약 180만 ~ 204만 원</p>
+          <p class="text-[11px] text-slate-500 mt-1">식비, 교통비, 셀린느 지갑, 의류, 입장료 등</p>
+        </div>
+        <div class="glass-card p-4 rounded-xl border border-emerald-200 bg-emerald-50/40">
+          <p class="text-xs font-bold text-emerald-800">예상 환급액 (미확정·변동)</p>
+          <p class="text-2xl font-black text-emerald-600 mt-1">최대 추정 -110,000원</p>
+          <p class="text-[11px] text-slate-500 mt-1">대상 매장·구매액·수수료에 따라 실제 환급액은 달라짐</p>
+        </div>
+      </div>
+      <div class="rounded-xl border border-amber-200 bg-amber-50 p-4 text-xs sm:text-sm text-amber-950 space-y-1.5">
+        <p class="font-extrabold">예산 합계 재계산</p>
+        <p>고정비 2,099,561원 + 현지 지출 1,800,300~2,035,300원 = <strong>환급 전 3,899,861~4,134,861원</strong>.</p>
+        <p>환급 110,000원을 전액 받는다고 가정하면 <strong>3,789,861~4,024,861원</strong>이지만, 환급액은 확정되지 않았으므로 여행 예산은 환급 전 금액으로 준비하는 편이 안전합니다.</p>
+        <p>항공 귀국편 450,000원과 비에이 투어 190,000원은 아직 예정 금액이므로 실제 결제액으로 업데이트하세요.</p>
+      </div>
+
+      <!-- Detailed Breakdown Table -->
+      <div class="glass-card rounded-xl border border-slate-200 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm">
+            <thead class="bg-slate-100/80 text-slate-700 font-bold border-b border-slate-200">
+              <tr>
+                <th class="py-3 px-4">구분</th>
+                <th class="py-3 px-4">지출 항목</th>
+                <th class="py-3 px-4">결제 방식</th>
+                <th class="py-3 px-4 text-right">금액 (원화 환산)</th>
+                <th class="py-3 px-4">세부 내용 및 비고</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-600">
+              <tr class="bg-slate-50/40">
+                <td class="py-2.5 px-4 font-semibold text-slate-800" rowspan="3">사전 결제<br><span class="text-[10px] text-emerald-600 font-bold">확정완료</span></td>
+                <td class="py-2.5 px-4 font-medium text-slate-900">항공권 누적 수수료</td>
+                <td class="py-2.5 px-4 text-slate-500">기결제</td>
+                <td class="py-2.5 px-4 text-right font-bold text-slate-900">180,000원</td>
+                <td class="py-2.5 px-4 text-slate-500">1차(8만)+대행(2만)+2차(8만) 매몰</td>
+              </tr>
+              <tr class="bg-slate-50/40">
+                <td class="py-2.5 px-4 font-medium text-slate-900">가는 편 항공권 (07:40)</td>
+                <td class="py-2.5 px-4 text-slate-500">기결제</td>
+                <td class="py-2.5 px-4 text-right font-bold text-slate-900">409,600원</td>
+                <td class="py-2.5 px-4 text-emerald-600 font-medium">2인 초특가 발권 성공</td>
+              </tr>
+              <tr class="bg-slate-50/40">
+                <td class="py-2.5 px-4 font-medium text-slate-900">숙소 (베셀 캄파나 4박)</td>
+                <td class="py-2.5 px-4 text-slate-500">기결제</td>
+                <td class="py-2.5 px-4 text-right font-bold text-slate-900">869,961원</td>
+                <td class="py-2.5 px-4 text-slate-500">조식 뷔페 포함 플랜으로 변경 완료</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-semibold text-slate-800" rowspan="2">예정 지출</td>
+                <td class="py-2.5 px-4 font-medium text-slate-900">오는 편 항공권 (1/30 낮)</td>
+                <td class="py-2.5 px-4 text-slate-500">추후 결제</td>
+                <td class="py-2.5 px-4 text-right font-bold text-slate-900">약 450,000원</td>
+                <td class="py-2.5 px-4 text-slate-500">11월 중순 특가 대기 (2인 45~50만 목표)</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-medium text-slate-900">비에이 버스투어</td>
+                <td class="py-2.5 px-4 text-slate-500">추후 결제</td>
+                <td class="py-2.5 px-4 text-right font-bold text-slate-900">약 190,000원</td>
+                <td class="py-2.5 px-4 text-slate-500">겨울 성수기 준페이 확정 코스</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-semibold text-slate-800" rowspan="2">현장 필수</td>
+                <td class="py-2.5 px-4 font-medium text-slate-900">삿포로시 신규 숙박세</td>
+                <td class="py-2.5 px-4 text-rose-600 font-semibold">현금 지불</td>
+                <td class="py-2.5 px-4 text-right font-bold text-slate-900">약 20,300원</td>
+                <td class="py-2.5 px-4 text-slate-500">2인 4박 2,400엔 (체크인 시 인출 현금 지불)</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-medium text-slate-900">현지 대중교통비</td>
+                <td class="py-2.5 px-4 text-rose-600 font-semibold">현금 충전</td>
+                <td class="py-2.5 px-4 text-right font-bold text-slate-900">약 110,000원</td>
+                <td class="py-2.5 px-4 text-slate-500">파스모/이코카 + 수족관 왕복 버스</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-semibold text-slate-800">식음료</td>
+                <td class="py-2.5 px-4 font-medium text-slate-900">미식, 간식, 파르페 (4.5일)</td>
+                <td class="py-2.5 px-4 text-slate-500">카드 + 현금</td>
+                <td class="py-2.5 px-4 text-right font-bold text-slate-900">약 450,000원</td>
+                <td class="py-2.5 px-4 text-slate-500">본즈, 스아게, 하나마루, 츠바메야 등</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-semibold text-slate-800" rowspan="3">쇼핑</td>
+                <td class="py-2.5 px-4 font-medium text-slate-900">셀린느(Celine) 지갑</td>
+                <td class="py-2.5 px-4 text-sky-600 font-semibold">트래블카드</td>
+                <td class="py-2.5 px-4 text-right font-bold text-slate-900">480,000 ~ 550,000원</td>
+                <td class="py-2.5 px-4 text-slate-500">다이마루 백화점 (소비세 10% 포함 결제)</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-medium text-slate-900">스투시 & 휴먼메이드</td>
+                <td class="py-2.5 px-4 text-sky-600 font-semibold">트래블카드</td>
+                <td class="py-2.5 px-4 text-right font-bold text-slate-900">440,000 ~ 550,000원</td>
+                <td class="py-2.5 px-4 text-slate-500">1일차 선방문 의류 쇼핑</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-medium text-slate-900">돈키호테 & 몽벨 & 기념품</td>
+                <td class="py-2.5 px-4 text-sky-600 font-semibold">트래블카드</td>
+                <td class="py-2.5 px-4 text-right font-bold text-slate-900">220,000 ~ 275,000원</td>
+                <td class="py-2.5 px-4 text-slate-500">생노스망, 버터샌드, 면세 잡화</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-semibold text-slate-800">관광/입장</td>
+                <td class="py-2.5 px-4 font-medium text-slate-900">오타루 수족관 & 로프웨이</td>
+                <td class="py-2.5 px-4 text-slate-500">카드 + 현금</td>
+                <td class="py-2.5 px-4 text-right font-bold text-slate-900">약 80,000원</td>
+                <td class="py-2.5 px-4 text-slate-500">수족관 2인(약 2.3만) + 모이와산 왕복</td>
+              </tr>
+              <tr class="bg-emerald-50/70 font-semibold">
+                <td class="py-2.5 px-4 text-emerald-800" colspan="3">예상 세금 환급 (미확정·상한 추정치)</td>
+                <td class="py-2.5 px-4 text-right text-emerald-700 font-bold">최대 추정 -110,000원</td>
+                <td class="py-2.5 px-4 text-emerald-700">환급액은 구매 조건·수수료 등에 따라 변동</td>
+              </tr>
+              <tr class="bg-slate-900 text-white font-bold">
+                <td class="py-3 px-4" colspan="3">최종 총 여행 실부담액 (2인 전체)</td>
+                <td class="py-3 px-4 text-right text-sky-300 font-black text-sm sm:text-base">환급 전 3,899,861 ~ 4,134,861원</td>
+                <td class="py-3 px-4 text-slate-300">환급 11만 원 전액 가정 시 3,789,861 ~ 4,024,861원</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: 핵심 팁 & 체크리스트 (CHECKLIST) -->
+    <!-- ========================================== -->
+    <section id="tab-content-checklist" class="tab-pane hidden space-y-6">
+      <div class="border-b border-slate-200 pb-3 flex items-center gap-2">
+        <span class="text-xl">📌</span>
+        <div>
+          <h3 class="text-lg font-bold text-slate-900">삿포로 여행 핵심 체크포인트</h3>
+          <p class="text-xs text-slate-500 mt-0.5">현지에서 실수하기 쉬운 핵심 규칙을 미리 확인하세요.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <!-- Tax refund protocol -->
+        <div class="glass-card p-5 rounded-2xl border-l-4 border-l-rose-500 space-y-2">
+          <h4 class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
+            <span class="text-base">🚨</span> 개정 텍스 리펀 (수하물 위탁 전 스캔!)
+          </h4>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            2026년 11월부터 적용되는 환급 방식 기준으로, 시내 매장에서는 소비세 포함 가격을 결제하고 출국 시 세관 확인 절차를 거칩니다. <strong>위탁 수하물을 부치기 전에</strong> 구매 물품(지갑·의류)과 여권을 확인받을 수 있도록 준비하세요. 환급 대상·절차는 매장 및 구매 조건에 따라 다르고, 소비세 포함 가격에서 세금 부분은 단순히 총액의 10%가 아니라 약 10/110(약 9.09%)이며 수수료 등이 적용될 수 있습니다. 환급액 11만 원은 확정 수입이 아닌 예산상 추정치입니다.
+          </p>
+        </div>
+
+        <!-- ATM Cash -->
+        <div class="glass-card p-5 rounded-2xl border-l-4 border-l-amber-500 space-y-2">
+          <h4 class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
+            <span class="text-base">💴</span> 공항 세븐뱅크 30,000엔 사용처 분배
+          </h4>
+          <ul class="text-xs text-slate-600 space-y-1 leading-relaxed">
+            <li>• <strong>교통카드 충전</strong>: 10,000엔 (아내 이코카 5천 + 남편 파스모 5천)</li>
+            <li>• <strong>호텔 숙박세</strong>: 예산 기준 2,400엔 (1인 1박 300엔 × 2명 × 4박, 호텔에 실제 금액 확인)</li>
+            <li>• <strong>현금 전용 맛집</strong>: 약 8,000엔 (준페이, 스아게, 라멘신겐, 로쿠미안)</li>
+            <li>• <strong>여유 비상금</strong>: 약 9,600엔 잔여 (자판기 및 닝구르테라스)</li>
+          </ul>
+        </div>
+
+        <!-- Before-trip verification -->
+        <div class="glass-card p-5 rounded-2xl border-l-4 border-l-emerald-500 space-y-2">
+          <h4 class="font-bold text-sm text-slate-900 flex items-center gap-1.5"><span class="text-base">🧾</span> 출발 전 최종 확인</h4>
+          <ul class="text-xs text-slate-600 space-y-1 leading-relaxed">
+            <li>• 귀국 항공편 실제 출발 시각·체크인 마감·위탁 수하물 규정</li>
+            <li>• 비에이 투어에 준페이 식사 포함 여부 및 취소 규정</li>
+            <li>• 숙박세 2,400엔 및 결제 수단, 교통카드 충전액</li>
+            <li>• 본즈 예약, 다이마루·네무로 하나마루·스아게 운영 시간/대기 방식</li>
+            <li>• 쇼핑 품목별 면세 가능 여부와 환급 절차</li>
+          </ul>
+        </div>
+
+        <!-- Ice spikes -->
+        <div class="glass-card p-5 rounded-2xl border-l-4 border-l-sky-500 space-y-2">
+          <h4 class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
+            <span class="text-base">🥾</span> K2 신발용 간이 스파이크 (1일차 사츠도라)
+          </h4>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            삿포로 도심 횡단보도와 골목길은 빙판길이 매우 미끄럽습니다. 1일 차 다누키코지 사츠도라(약국)에서 신발 밑창에 끼우는 <strong>도시형 고무 스파이크(약 1,000엔)</strong>를 사서 신발에 착용하면 4박 5일 내내 넘어질 걱정 없이 안전하게 다닐 수 있습니다.
+          </p>
+        </div>
+
+        <!-- Otaru Bus -->
+        <div class="glass-card p-5 rounded-2xl border-l-4 border-l-violet-500 space-y-2">
+          <h4 class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
+            <span class="text-base">🚌</span> 오타루 수족관 버스 탑승 안내
+          </h4>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            수족관행 버스는 미나미오타루역이 아닌 <strong>'오타루역(Otaru)'</strong> 앞에서 출발합니다. 역 앞 버스 터미널 3번 홈에서 10번 또는 11번 버스를 탑승하시면 되며, 승하차 시 이코카/파스모 카드를 단말기에 태그하시면 됩니다.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-sapporo-night text-slate-400 py-8 border-t border-slate-800 text-center text-xs mt-auto space-y-1">
+    <p class="font-bold text-slate-300">❄️ 2027 SAPPORO : Winter Escape with My Love</p>
+    <p>삿포로 • 오타루 • 비에이 4박 5일 로맨틱 설경 & 미식 투어</p>
+    <p class="text-[11px] text-slate-500 pt-1">Vessel Hotel Campana Susukino • All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // Tab Switching Function
+    function switchTab(tabId) {
+      const panes = document.querySelectorAll('.tab-pane');
+      panes.forEach(pane => pane.classList.add('hidden'));
+
+      const targetPane = document.getElementById('tab-content-' + tabId);
+      if (targetPane) {
+        targetPane.classList.remove('hidden');
+      }
+
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-sky-500', 'text-white', 'shadow-sm');
+        btn.classList.add('text-slate-300', 'hover:text-white', 'hover:bg-slate-800/60');
+      });
+
+      const activeBtn = document.getElementById('btn-tab-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-sky-500', 'text-white', 'shadow-sm');
+        activeBtn.classList.remove('text-slate-300', 'hover:text-white', 'hover:bg-slate-800/60');
+      }
+    }
+
+    // Day Cards Filter
+    function filterDayCards(day) {
+      const cards = document.querySelectorAll('.day-card');
+      const buttons = document.querySelectorAll('#dayFilterGroup .day-btn');
+
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-slate-800', 'text-white');
+        btn.classList.add('bg-white', 'text-slate-600');
+      });
+
+      if (event && event.target) {
+        event.target.classList.add('bg-slate-800', 'text-white');
+        event.target.classList.remove('bg-white', 'text-slate-600');
+      }
+
+      cards.forEach(card => {
+        if (day === 'all' || card.getAttribute('data-day') === day) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Payment Filter in Tab 2
+    function filterPayment(type) {
+      const cards = document.querySelectorAll('#restaurantGrid > div');
+      const buttons = document.querySelectorAll('.pay-filter-btn');
+
+      buttons.forEach(btn => {
+        btn.classList.remove('ring-2', 'ring-slate-800');
+      });
+      if (event && event.target) {
+        event.target.classList.add('ring-2', 'ring-slate-800');
+      }
+
+      cards.forEach(card => {
+        if (type === 'all' || card.getAttribute('data-pay') === type) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
