@@ -180,6 +180,43 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
+
+
+    /* Budget tables: comfortable stacked cards on narrow screens, standard tables on larger screens. */
+    #tab-content-budget .budget-table-wrap { width: 100%; max-width: 100%; overflow: hidden; }
+    #tab-content-budget .budget-table { width: 100%; min-width: 0 !important; table-layout: fixed; border-collapse: collapse; }
+    #tab-content-budget .budget-table th, #tab-content-budget .budget-table td { overflow-wrap: anywhere; word-break: normal; vertical-align: top; }
+    #tab-content-budget .budget-table th:nth-child(1) { width: 13%; }
+    #tab-content-budget .budget-table th:nth-child(2) { width: 25%; }
+    #tab-content-budget .budget-table th:nth-child(3) { width: 18%; }
+    #tab-content-budget .budget-table th:nth-child(4) { width: 19%; }
+    #tab-content-budget .budget-table th:nth-child(5) { width: 25%; }
+    #tab-content-budget .settlement-table th:nth-child(1) { width: 18%; }
+    #tab-content-budget .settlement-table th:nth-child(2) { width: 32%; }
+    #tab-content-budget .settlement-table th:nth-child(3) { width: 22%; }
+    #tab-content-budget .settlement-table th:nth-child(4) { width: 28%; }
+    @media (max-width: 767px) {
+      #tab-content-budget .budget-table-wrap { border: 0; background: transparent; overflow: visible; }
+      #tab-content-budget .budget-table { display: block; width: 100%; min-width: 0 !important; }
+      #tab-content-budget .budget-table thead { display: none; }
+      #tab-content-budget .budget-table tbody { display: block; width: 100%; }
+      #tab-content-budget .budget-table tbody tr { display: block; width: 100%; margin: 0 0 10px; padding: 4px 0; border: 1px solid #e2e8f0; border-radius: 13px; background: #fff; box-shadow: 0 4px 12px rgba(15,23,42,.035); overflow: hidden; }
+      #tab-content-budget .budget-table tbody td { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; width: 100%; min-width: 0; padding: 8px 12px !important; border: 0 !important; border-bottom: 1px solid #f1f5f9 !important; text-align: right !important; line-height: 1.45; font-size: .82rem; }
+      #tab-content-budget .budget-table tbody td::before { content: attr(data-label); display: block; flex: 0 0 35%; min-width: 0; text-align: left; color: #64748b; font-size: .72rem; font-weight: 800; line-height: 1.45; }
+      #tab-content-budget .budget-table tbody td:last-child { border-bottom: 0 !important; }
+      #tab-content-budget .budget-table tbody td[data-label="엔화 (예상·참고)"],
+      #tab-content-budget .budget-table tbody td[data-label="원화 (확정·예상)"],
+      #tab-content-budget .budget-table tbody td[data-label="실제 원화 지출"] { font-variant-numeric: tabular-nums; }
+      #tab-content-budget .budget-table tbody td[data-label="항목"] { font-weight: 700; }
+      #tab-content-budget .budget-table tbody tr.settlement-total { background: #0f172a; }
+      #tab-content-budget .budget-table tbody tr.settlement-total td { color: #fff !important; border-bottom: 1px solid rgba(255,255,255,.12) !important; }
+      #tab-content-budget .budget-table tbody tr.settlement-total td::before { color: #cbd5e1; }
+      #tab-content-budget .budget-table tbody tr.settlement-total td:last-child { border-bottom: 0 !important; }
+      #tab-content-budget .funding-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+      #tab-content-budget .funding-metric:last-child { grid-column: 1 / -1; }
+      #tab-content-budget .funding-number { font-size: 1.15rem !important; }
+    }
+
   </style>
 </head>
 <body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col">
@@ -204,7 +241,7 @@
           💳 결제·맛집
         </button>
         <button onclick="switchTab('budget')" id="btn-tab-budget" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition text-slate-300 hover:text-white hover:bg-slate-800/60">
-          💰 최종 예산표
+          💰 예산 · 결산
         </button>
         <button onclick="switchTab('checklist')" id="btn-tab-checklist" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition text-slate-300 hover:text-white hover:bg-slate-800/60">
           📌 핵심 팁
@@ -786,199 +823,252 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- TAB 3: 최종 예산표 (BUDGET) -->
+    <!-- TAB 3: 여행 예산안 / 결산표 -->
     <!-- ========================================== -->
-    <section id="tab-content-budget" class="tab-pane hidden space-y-6">
-      <div class="border-b border-slate-200 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-        <div>
+    <section id="tab-content-budget" class="tab-pane hidden space-y-5">
+      <div class="border-b border-slate-200 pb-3 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+        <div class="min-w-0">
           <div class="flex items-center gap-2">
             <span class="text-xl">💰</span>
-            <h3 class="text-lg font-bold text-slate-900">4박 5일 2인 최종 여행 예산표</h3>
+            <h3 class="text-lg font-bold text-slate-900">여행 예산안 · 결산표</h3>
           </div>
-          <p class="text-xs text-slate-500 mt-0.5">매몰 수수료 18만 원과 조식 포함 숙소 반영. 현지 비용에는 선택 쇼핑 예상치가 포함되며, 트래블카드 충전액은 지출과 중복 합산하지 않습니다.</p>
+          <p class="text-xs text-slate-500 mt-1 leading-relaxed">여행 전에는 예상 비용을 엔화·원화로 관리하고, 여행 후에는 사전 결제액과 실제 환전·충전에 사용한 원화만 결산에 기록합니다. 현지에서 사용한 엔화는 건별로 기록하지 않습니다.</p>
         </div>
-        <div class="text-right">
-          <span class="text-xs text-slate-500">총여행 예산 (환급 전):</span>
-          <span class="text-base sm:text-lg font-extrabold text-sky-700">약 390만 ~ 413만 원</span>
+        <div class="sm:text-right shrink-0">
+          <span class="text-xs text-slate-500 block">예상 총 여행비 · 환급 전</span>
+          <strong class="text-lg font-extrabold text-sky-700">3,899,861~4,134,861원</strong>
         </div>
       </div>
 
-      <!-- Travel-card funding is a source of funds, not an extra travel expense. -->
+      <!-- Exchange plan: show the actual KRW exchanged in settlement, without double counting in the forecast total. -->
       <section class="glass-card rounded-2xl border border-sky-200 bg-sky-50/60 p-4 sm:p-5 space-y-4" aria-labelledby="funding-title">
         <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-          <div>
-            <h4 id="funding-title" class="text-base sm:text-lg font-extrabold text-slate-900">💳 환전·트래블카드 충전 현황</h4>
-            <p class="text-xs sm:text-sm text-slate-600 mt-1">충전은 지출이 아니라 결제용 자금 이동입니다. 아래 금액을 여행비 합계에 다시 더하면 현지 구매액과 중복 계산될 수 있습니다.</p>
+          <div class="min-w-0">
+            <h4 id="funding-title" class="text-base sm:text-lg font-extrabold text-slate-900">💳 환전·트래블카드 충전 계획</h4>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">환전 완료액은 결산표에 실제 원화 지출로 반영합니다. 추가 환전은 실행 전까지 예상 금액으로만 표시하며, 예산 총액에는 환전액을 현지 예상 소비액과 중복해서 더하지 않습니다.</p>
           </div>
-          <span class="inline-flex w-fit rounded-full bg-white border border-sky-200 px-3 py-1 text-[11px] font-bold text-sky-800">추가 신용카드 사용 없이 운영 목표</span>
+          <span class="inline-flex w-fit rounded-full bg-white border border-sky-200 px-3 py-1 text-[11px] font-bold text-sky-800">출발 전 목표 200,000엔</span>
         </div>
-        <div class="funding-grid grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
-          <div class="funding-metric rounded-xl bg-white border border-slate-200 p-3">
-            <p class="text-[11px] text-slate-500 font-bold">충전 완료</p>
+        <div class="funding-grid grid grid-cols-2 md:grid-cols-3 gap-3">
+          <div class="funding-metric rounded-xl bg-white border border-emerald-200 p-3">
+            <p class="text-[11px] text-emerald-700 font-bold">환전 완료 · 결산 반영</p>
             <p class="funding-number text-xl font-black text-slate-900 mt-1">50,000엔</p>
-            <p class="text-xs font-bold text-emerald-700 mt-1">실제 환전 422,560원</p>
+            <p class="text-xs font-bold text-emerald-700 mt-1">422,560원 · 실제 환전액</p>
           </div>
-          <div class="funding-metric rounded-xl bg-white border border-slate-200 p-3">
-            <p class="text-[11px] text-slate-500 font-bold">추가 충전 예정</p>
+          <div class="funding-metric rounded-xl bg-white border border-amber-200 p-3">
+            <p class="text-[11px] text-amber-700 font-bold">추가 환전 예정</p>
             <p class="funding-number text-xl font-black text-slate-900 mt-1">150,000엔</p>
             <p class="text-xs font-bold text-amber-700 mt-1">약 1,267,680원*</p>
+            <p class="text-[10px] text-slate-500 mt-1">실제 환전 시 원화 금액 갱신</p>
           </div>
           <div class="funding-metric rounded-xl bg-white border border-sky-200 p-3">
-            <p class="text-[11px] text-sky-700 font-bold">출발 전 충전 목표</p>
+            <p class="text-[11px] text-sky-700 font-bold">출발 전 충전 목표 합계</p>
             <p class="funding-number text-xl font-black text-slate-900 mt-1">200,000엔</p>
             <p class="text-xs font-bold text-sky-700 mt-1">약 1,690,240원*</p>
           </div>
-          <div class="funding-metric rounded-xl bg-white border border-amber-200 p-3">
-            <p class="text-[11px] text-amber-700 font-bold">현지 ATM 출금 예정</p>
-            <p class="funding-number text-xl font-black text-slate-900 mt-1">30,000엔</p>
-            <p class="text-xs font-bold text-amber-700 mt-1">약 253,536원*</p>
-          </div>
-          <div class="funding-metric rounded-xl bg-white border border-emerald-200 p-3">
-            <p class="text-[11px] text-emerald-700 font-bold">카드 결제용 잔액</p>
-            <p class="funding-number text-xl font-black text-slate-900 mt-1">170,000엔</p>
-            <p class="text-xs font-bold text-emerald-700 mt-1">약 1,436,704원*</p>
-          </div>
         </div>
         <div class="rounded-xl bg-white/90 border border-sky-100 p-3 sm:p-4 space-y-2 text-xs sm:text-sm text-slate-700 leading-relaxed">
-          <p><strong>* 환산 기준:</strong> 이미 환전한 50,000엔 = 422,560원 기준(1엔 약 8.4512원)으로 계산한 참고치입니다. 추가 환전 시 실제 환율·수수료 및 ATM 출금 수수료에 따라 원화 지출은 달라집니다.</p>
-          <p><strong>현지 사용 계획:</strong> 출발 전 총 200,000엔을 충전한 뒤, 현지에서 30,000엔을 ATM으로 인출하고 남은 <strong>170,000엔은 트래블카드 결제용</strong>으로 사용합니다. 현금 인출은 같은 충전 잔액의 일부를 현금으로 바꾸는 것이므로 별도 예산으로 더하지 않습니다.</p>
-          <p><strong>쇼핑 예상치는 상한 시나리오:</strong> 현지 지출 예상 180만~204만원에는 셀린느·스투시·휴먼메이드·돈키호테 등 선택 쇼핑이 포함되어 있습니다. 구매하지 않거나 금액을 줄이면 실제 지출도 감소하므로, 현지 예산과 충전 목표를 동일하게 볼 필요는 없습니다.</p>
-          <p class="font-semibold text-sky-900">운영 방침: 우선 20만엔으로 출발하고, 필수 지출과 실제 쇼핑 금액을 확인한 뒤 부족할 때만 현지에서 추가 충전합니다. 신용카드 추가 사용이나 선택 쇼핑을 전제로 미리 과충전하지 않습니다.</p>
+          <p><strong>* 환산 기준:</strong> 기존 환전 50,000엔 = 422,560원 기준(약 1엔 = 8.4512원)으로 계산한 참고치입니다. 실제 추가 환전 원화액은 환율·수수료에 따라 달라질 수 있습니다.</p>
+          <p><strong>현지 사용 계획:</strong> 도착 후 30,000엔은 ATM에서 출금하고, 나머지 170,000엔은 카드 결제에 사용할 예정입니다. ATM 출금은 이미 충전한 금액을 현금으로 바꾸는 것이므로 별도 지출로 중복 기록하지 않습니다.</p>
+          <p><strong>결산 기준:</strong> 현재는 실제 환전한 422,560원을 결산에 포함합니다. 앞으로 충전할 150,000엔은 실제 환전 후 원화로 결제된 금액을 결산표에 추가합니다. 현지에서 결제한 엔화 내역은 따로 기록하지 않습니다.</p>
         </div>
       </section>
 
-      <!-- Budget 3-Card Summary Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="glass-card p-4 rounded-xl border border-sky-200 bg-sky-50/40">
-          <p class="text-xs font-bold text-sky-800">확정·예정 고정비</p>
-          <p class="text-2xl font-black text-slate-900 mt-1">2,099,561원</p>
-          <p class="text-[11px] text-slate-500 mt-1">항공권(수수료 18만 포함) + 베셀 4박(조식) + 투어</p>
+      <!-- SECTION 1: BUDGET PLAN -->
+      <section class="space-y-3" aria-labelledby="budget-plan-title">
+        <div class="flex flex-col gap-1">
+          <h4 id="budget-plan-title" class="text-base sm:text-lg font-extrabold text-slate-900">1. 예산안 · 예상 경비</h4>
+          <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">아직 발생하지 않은 비용은 예상 금액만 기록했습니다. 현지 비용은 예상 엔화와 원화를 함께 표기하며, 항공·숙소 등 원화 결제 항목의 엔화는 비교용 참고 환산액입니다.</p>
         </div>
-        <div class="glass-card p-4 rounded-xl border border-amber-200 bg-amber-50/40">
-          <p class="text-xs font-bold text-amber-800">현지 지출 예상액 (소비세 포함)</p>
-          <p class="text-2xl font-black text-slate-900 mt-1">약 180만 ~ 204만 원</p>
-          <p class="text-[11px] text-slate-500 mt-1">식비, 교통비, 셀린느 지갑, 의류, 입장료 등</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="glass-card p-4 rounded-xl border border-sky-200 bg-sky-50/50">
+            <p class="text-xs font-bold text-sky-800">현지 필요 예산 · 예상</p>
+            <p class="text-lg sm:text-xl font-black text-slate-900 mt-1">약 213,000~241,000엔</p>
+            <p class="text-sm font-bold text-sky-800 mt-1">1,800,300~2,035,300원</p>
+            <p class="text-[11px] text-slate-500 mt-1">선택 쇼핑 포함, 실제 구매 여부에 따라 감소 가능</p>
+          </div>
+          <div class="glass-card p-4 rounded-xl border border-slate-200 bg-white">
+            <p class="text-xs font-bold text-slate-600">여행 전체 예산 · 환급 전</p>
+            <p class="text-lg sm:text-xl font-black text-slate-900 mt-1">3,899,861~4,134,861원</p>
+            <p class="text-[11px] text-slate-500 mt-1">예정 고정비 2,099,561원 + 현지 예상 비용</p>
+          </div>
         </div>
-        <div class="glass-card p-4 rounded-xl border border-emerald-200 bg-emerald-50/40">
-          <p class="text-xs font-bold text-emerald-800">예상 환급액 (미확정·변동)</p>
-          <p class="text-2xl font-black text-emerald-600 mt-1">최대 추정 -110,000원</p>
-          <p class="text-[11px] text-slate-500 mt-1">대상 매장·구매액·수수료에 따라 실제 환급액은 달라짐</p>
-        </div>
-      </div>
-      <div class="rounded-xl border border-amber-200 bg-amber-50 p-4 text-xs sm:text-sm text-amber-950 space-y-1.5">
-        <p class="font-extrabold">총여행 예산 합계 (환전 충전액 중복 제외)</p>
-        <p>고정비 2,099,561원 + 현지 지출 추정 1,800,300~2,035,300원 = <strong>환급 전 3,899,861~4,134,861원</strong>.</p>
-        <p>환급 110,000원을 전액 받는다고 가정하면 <strong>3,789,861~4,024,861원</strong>이지만, 환급액은 확정되지 않았으므로 환급 전 금액을 기준으로 예산을 관리하세요.</p>
-        <p>이 현지 지출 추정에는 선택 쇼핑 상단까지 포함되어 있어 실제 총액은 더 낮아질 수 있습니다. 트래블카드 충전 목표는 200,000엔(기존 50,000엔 포함)이며, 현지 ATM 현금 30,000엔과 카드 결제 잔액 170,000엔으로 나누어 사용합니다. 충전액을 총여행 예산에 다시 더하지 않습니다.</p>
-        <p>항공 귀국편 450,000원과 비에이 투어 190,000원은 아직 예정 금액이므로 실제 결제액으로 업데이트하세요. 추가 충전은 현지에서 필수 지출·구매 금액을 확인한 뒤 필요할 때만 진행합니다.</p>
-      </div>
 
-      <!-- Detailed Breakdown Table -->
-      <div class="glass-card rounded-xl border border-slate-200 overflow-hidden">
-        <div class="overflow-x-auto table-scroll" aria-label="예산표: 좌우로 밀어 상세 항목 확인">
-          <table class="w-full text-left text-xs sm:text-sm">
-            <thead class="bg-slate-100/80 text-slate-700 font-bold border-b border-slate-200">
+        <div class="budget-table-wrap rounded-xl border border-slate-200 bg-white">
+          <table class="budget-table text-left text-xs sm:text-sm" aria-label="여행 예산안">
+            <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
               <tr>
-                <th class="py-3 px-4">구분</th>
-                <th class="py-3 px-4">지출 항목</th>
-                <th class="py-3 px-4">결제 방식</th>
-                <th class="py-3 px-4 text-right">금액 (원화 환산)</th>
-                <th class="py-3 px-4">세부 내용 및 비고</th>
+                <th class="py-3 px-3">구분</th>
+                <th class="py-3 px-3">항목</th>
+                <th class="py-3 px-3 text-right">엔화 (예상·참고)</th>
+                <th class="py-3 px-3 text-right">원화 (확정·예상)</th>
+                <th class="py-3 px-3">상태 / 비고</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100 text-slate-600">
-              <tr class="bg-slate-50/40">
-                <td class="py-2.5 px-4 font-semibold text-slate-800" rowspan="3">사전 결제<br><span class="text-[10px] text-emerald-600 font-bold">확정완료</span></td>
-                <td class="py-2.5 px-4 font-medium text-slate-900">항공권 누적 수수료</td>
-                <td class="py-2.5 px-4 text-slate-500">기결제</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-900">180,000원</td>
-                <td class="py-2.5 px-4 text-slate-500">1차(8만)+대행(2만)+2차(8만) 매몰</td>
-              </tr>
-              <tr class="bg-slate-50/40">
-                <td class="py-2.5 px-4 font-medium text-slate-900">가는 편 항공권 (07:40)</td>
-                <td class="py-2.5 px-4 text-slate-500">기결제</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-900">409,600원</td>
-                <td class="py-2.5 px-4 text-emerald-600 font-medium">2인 초특가 발권 성공</td>
-              </tr>
-              <tr class="bg-slate-50/40">
-                <td class="py-2.5 px-4 font-medium text-slate-900">숙소 (베셀 캄파나 4박)</td>
-                <td class="py-2.5 px-4 text-slate-500">기결제</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-900">869,961원</td>
-                <td class="py-2.5 px-4 text-slate-500">조식 뷔페 포함 플랜으로 변경 완료</td>
+              <tr>
+                <td data-label="구분" class="py-2.5 px-3 font-semibold text-slate-800">사전 비용</td>
+                <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">항공권 누적 수수료</td>
+                <td data-label="엔화 (예상·참고)" class="py-2.5 px-3 text-right">약 21,299엔</td>
+                <td data-label="원화 (확정·예상)" class="py-2.5 px-3 text-right font-bold text-slate-900">180,000원</td>
+                <td data-label="상태 / 비고" class="py-2.5 px-3">확정 지출 · 매몰 수수료</td>
               </tr>
               <tr>
-                <td class="py-2.5 px-4 font-semibold text-slate-800" rowspan="2">예정 지출</td>
-                <td class="py-2.5 px-4 font-medium text-slate-900">오는 편 항공권 (1/30 낮)</td>
-                <td class="py-2.5 px-4 text-slate-500">추후 결제</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-900">약 450,000원</td>
-                <td class="py-2.5 px-4 text-slate-500">11월 중순 특가 대기 (2인 45~50만 목표)</td>
+                <td data-label="구분" class="py-2.5 px-3 font-semibold text-slate-800">항공</td>
+                <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">가는 편 항공권 (07:40)</td>
+                <td data-label="엔화 (예상·참고)" class="py-2.5 px-3 text-right">약 48,466엔</td>
+                <td data-label="원화 (확정·예상)" class="py-2.5 px-3 text-right font-bold text-slate-900">409,600원</td>
+                <td data-label="상태 / 비고" class="py-2.5 px-3">기결제 · 2인</td>
               </tr>
               <tr>
-                <td class="py-2.5 px-4 font-medium text-slate-900">비에이 버스투어</td>
-                <td class="py-2.5 px-4 text-slate-500">추후 결제</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-900">약 190,000원</td>
-                <td class="py-2.5 px-4 text-slate-500">겨울 성수기 준페이 확정 코스</td>
+                <td data-label="구분" class="py-2.5 px-3 font-semibold text-slate-800">숙소</td>
+                <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">베셀 캄파나 스스키노 (4박)</td>
+                <td data-label="엔화 (예상·참고)" class="py-2.5 px-3 text-right">약 102,944엔</td>
+                <td data-label="원화 (확정·예상)" class="py-2.5 px-3 text-right font-bold text-slate-900">869,961원</td>
+                <td data-label="상태 / 비고" class="py-2.5 px-3">기결제 · 조식 포함</td>
               </tr>
               <tr>
-                <td class="py-2.5 px-4 font-semibold text-slate-800" rowspan="2">현장 필수</td>
-                <td class="py-2.5 px-4 font-medium text-slate-900">삿포로시 신규 숙박세</td>
-                <td class="py-2.5 px-4 text-rose-600 font-semibold">현금 지불</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-900">약 20,300원</td>
-                <td class="py-2.5 px-4 text-slate-500">2인 4박 2,400엔 (체크인 시 인출 현금 지불)</td>
+                <td data-label="구분" class="py-2.5 px-3 font-semibold text-amber-800">예정 비용</td>
+                <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">오는 편 항공권 (1/30 낮)</td>
+                <td data-label="엔화 (예상·참고)" class="py-2.5 px-3 text-right">약 53,246엔</td>
+                <td data-label="원화 (확정·예상)" class="py-2.5 px-3 text-right font-bold text-slate-900">약 450,000원</td>
+                <td data-label="상태 / 비고" class="py-2.5 px-3">미결제 예상 · 2인</td>
               </tr>
               <tr>
-                <td class="py-2.5 px-4 font-medium text-slate-900">현지 대중교통비</td>
-                <td class="py-2.5 px-4 text-rose-600 font-semibold">현금 충전</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-900">약 110,000원</td>
-                <td class="py-2.5 px-4 text-slate-500">파스모/이코카 + 수족관 왕복 버스</td>
+                <td data-label="구분" class="py-2.5 px-3 font-semibold text-amber-800">예정 비용</td>
+                <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">비에이 겨울 버스투어</td>
+                <td data-label="엔화 (예상·참고)" class="py-2.5 px-3 text-right">약 22,482엔</td>
+                <td data-label="원화 (확정·예상)" class="py-2.5 px-3 text-right font-bold text-slate-900">약 190,000원</td>
+                <td data-label="상태 / 비고" class="py-2.5 px-3">미결제 예상 · 식사 포함 여부 확인</td>
               </tr>
               <tr>
-                <td class="py-2.5 px-4 font-semibold text-slate-800">식음료</td>
-                <td class="py-2.5 px-4 font-medium text-slate-900">미식, 간식, 파르페 (4.5일)</td>
-                <td class="py-2.5 px-4 text-slate-500">카드 + 현금</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-900">약 450,000원</td>
-                <td class="py-2.5 px-4 text-slate-500">본즈, 스아게, 하나마루, 야끼니꾸 츠바메 등</td>
+                <td data-label="구분" class="py-2.5 px-3 font-semibold text-slate-800">현지 필수</td>
+                <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">삿포로시 숙박세</td>
+                <td data-label="엔화 (예상·참고)" class="py-2.5 px-3 text-right">2,400엔</td>
+                <td data-label="원화 (확정·예상)" class="py-2.5 px-3 text-right font-bold text-slate-900">약 20,300원</td>
+                <td data-label="상태 / 비고" class="py-2.5 px-3">현장 지불 · 호텔에 실제 금액 확인</td>
               </tr>
               <tr>
-                <td class="py-2.5 px-4 font-semibold text-slate-800" rowspan="3">쇼핑</td>
-                <td class="py-2.5 px-4 font-medium text-slate-900">셀린느(Celine) 지갑</td>
-                <td class="py-2.5 px-4 text-sky-600 font-semibold">트래블카드</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-900">480,000 ~ 550,000원</td>
-                <td class="py-2.5 px-4 text-slate-500">다이마루 백화점 (소비세 10% 포함 결제)</td>
+                <td data-label="구분" class="py-2.5 px-3 font-semibold text-slate-800">현지 필수</td>
+                <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">교통비</td>
+                <td data-label="엔화 (예상·참고)" class="py-2.5 px-3 text-right">약 13,016엔</td>
+                <td data-label="원화 (확정·예상)" class="py-2.5 px-3 text-right font-bold text-slate-900">약 110,000원</td>
+                <td data-label="상태 / 비고" class="py-2.5 px-3">교통카드 충전·오타루 버스 등</td>
               </tr>
               <tr>
-                <td class="py-2.5 px-4 font-medium text-slate-900">스투시 & 휴먼메이드</td>
-                <td class="py-2.5 px-4 text-sky-600 font-semibold">트래블카드</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-900">440,000 ~ 550,000원</td>
-                <td class="py-2.5 px-4 text-slate-500">1일차 선방문 의류 쇼핑</td>
+                <td data-label="구분" class="py-2.5 px-3 font-semibold text-slate-800">식음료</td>
+                <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">식사·간식·파르페 (4.5일)</td>
+                <td data-label="엔화 (예상·참고)" class="py-2.5 px-3 text-right">약 53,247엔</td>
+                <td data-label="원화 (확정·예상)" class="py-2.5 px-3 text-right font-bold text-slate-900">약 450,000원</td>
+                <td data-label="상태 / 비고" class="py-2.5 px-3">츠바메·스아게·본즈·하나마루 등</td>
               </tr>
               <tr>
-                <td class="py-2.5 px-4 font-medium text-slate-900">돈키호테 & 몽벨 & 기념품</td>
-                <td class="py-2.5 px-4 text-sky-600 font-semibold">트래블카드</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-900">220,000 ~ 275,000원</td>
-                <td class="py-2.5 px-4 text-slate-500">생노스망, 버터샌드, 면세 잡화</td>
+                <td data-label="구분" class="py-2.5 px-3 font-semibold text-violet-800">선택 쇼핑</td>
+                <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">셀린느 지갑</td>
+                <td data-label="엔화 (예상·참고)" class="py-2.5 px-3 text-right">약 56,797~65,080엔</td>
+                <td data-label="원화 (확정·예상)" class="py-2.5 px-3 text-right font-bold text-slate-900">480,000~550,000원</td>
+                <td data-label="상태 / 비고" class="py-2.5 px-3">구매 여부·모델에 따라 변동</td>
               </tr>
               <tr>
-                <td class="py-2.5 px-4 font-semibold text-slate-800">관광/입장</td>
-                <td class="py-2.5 px-4 font-medium text-slate-900">오타루 수족관 & 로프웨이</td>
-                <td class="py-2.5 px-4 text-slate-500">카드 + 현금</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-900">약 80,000원</td>
-                <td class="py-2.5 px-4 text-slate-500">수족관 2인(약 2.3만) + 모이와산 왕복</td>
+                <td data-label="구분" class="py-2.5 px-3 font-semibold text-violet-800">선택 쇼핑</td>
+                <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">스투시 & 휴먼메이드</td>
+                <td data-label="엔화 (예상·참고)" class="py-2.5 px-3 text-right">약 52,064~65,080엔</td>
+                <td data-label="원화 (확정·예상)" class="py-2.5 px-3 text-right font-bold text-slate-900">440,000~550,000원</td>
+                <td data-label="상태 / 비고" class="py-2.5 px-3">선택 쇼핑 · 구매액 변동</td>
               </tr>
-              <tr class="bg-emerald-50/70 font-semibold">
-                <td class="py-2.5 px-4 text-emerald-800" colspan="3">예상 세금 환급 (미확정·상한 추정치)</td>
-                <td class="py-2.5 px-4 text-right text-emerald-700 font-bold">최대 추정 -110,000원</td>
-                <td class="py-2.5 px-4 text-emerald-700">환급액은 구매 조건·수수료 등에 따라 변동</td>
+              <tr>
+                <td data-label="구분" class="py-2.5 px-3 font-semibold text-violet-800">선택 쇼핑</td>
+                <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">돈키호테·몽벨·기념품</td>
+                <td data-label="엔화 (예상·참고)" class="py-2.5 px-3 text-right">약 26,032~32,540엔</td>
+                <td data-label="원화 (확정·예상)" class="py-2.5 px-3 text-right font-bold text-slate-900">220,000~275,000원</td>
+                <td data-label="상태 / 비고" class="py-2.5 px-3">구매하지 않으면 미발생</td>
               </tr>
-              <tr class="bg-slate-900 text-white font-bold">
-                <td class="py-3 px-4" colspan="3">최종 총 여행 실부담액 (2인 전체)</td>
-                <td class="py-3 px-4 text-right text-sky-300 font-black text-sm sm:text-base">환급 전 3,899,861 ~ 4,134,861원</td>
-                <td class="py-3 px-4 text-slate-300">환급 11만 원 전액 가정 시 3,789,861 ~ 4,024,861원</td>
+              <tr>
+                <td data-label="구분" class="py-2.5 px-3 font-semibold text-slate-800">관광·입장</td>
+                <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">오타루 수족관·모이와산 로프웨이</td>
+                <td data-label="엔화 (예상·참고)" class="py-2.5 px-3 text-right">약 9,466엔</td>
+                <td data-label="원화 (확정·예상)" class="py-2.5 px-3 text-right font-bold text-slate-900">약 80,000원</td>
+                <td data-label="상태 / 비고" class="py-2.5 px-3">2인 입장·왕복 이용 예상</td>
               </tr>
             </tbody>
           </table>
         </div>
-      </div>
+        <div class="rounded-xl border border-amber-200 bg-amber-50 p-3 sm:p-4 text-xs sm:text-sm text-amber-950 space-y-1.5 leading-relaxed">
+          <p class="font-extrabold">예산 운영 기준</p>
+          <p>사전 결제·예정 비용 합계는 <strong>2,099,561원</strong>이며, 현지 지출 예상액 <strong>1,800,300~2,035,300원</strong>을 더한 전체 예상 예산은 <strong>3,899,861~4,134,861원</strong>입니다.</p>
+          <p>예상 환급액 최대 110,000원은 미확정이므로 전체 예산에서 차감하지 않았습니다. 쇼핑은 선택 비용이며, 사용하지 않은 예산은 실제 지출에 반영하지 않습니다.</p>
+          <p>항공·숙소·투어 등 원화로 결제하는 항목의 엔화 금액은 비교용 환산치이며, 현지 필요 엔화 합계에는 포함하지 않습니다. 엔화 환산은 약 1엔 = 8.4512원 기준으로 개별 반올림했으므로 합계와 1~몇 엔 차이가 날 수 있습니다.</p>
+        </div>
+      </section>
+
+      <!-- SECTION 2: SETTLEMENT -->
+      <section class="space-y-3" aria-labelledby="settlement-title">
+        <div class="flex flex-col gap-1">
+          <h4 id="settlement-title" class="text-base sm:text-lg font-extrabold text-slate-900">2. 결산표 · 현재까지 확정 지출</h4>
+          <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">여행 후에도 현지 결제 건별 엔화는 기록하지 않고, 이미 지출한 원화와 실제 환전·충전에 사용한 원화를 기록합니다. 아직 결제·환전하지 않은 금액은 결산 합계에서 제외합니다.</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="glass-card p-4 rounded-xl border border-emerald-200 bg-emerald-50/50">
+            <p class="text-xs font-bold text-emerald-800">현재까지 확정 지출 합계</p>
+            <p class="text-2xl font-black text-slate-900 mt-1">1,882,121원</p>
+            <p class="text-[11px] text-slate-500 mt-1">사전 결제 1,459,561원 + 환전 완료 422,560원</p>
+          </div>
+          <div class="glass-card p-4 rounded-xl border border-slate-200 bg-white">
+            <p class="text-xs font-bold text-slate-600">아직 결산에 미포함</p>
+            <p class="text-lg font-black text-slate-900 mt-1">추가 환전·귀국편·투어</p>
+            <p class="text-[11px] text-slate-500 mt-1">실제 결제 또는 환전 후 확정 원화 금액으로 추가</p>
+          </div>
+        </div>
+        <div class="budget-table-wrap rounded-xl border border-slate-200 bg-white">
+          <table class="budget-table settlement-table text-left text-xs sm:text-sm" aria-label="현재까지 확정 지출 결산표">
+            <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+              <tr>
+                <th class="py-3 px-3">구분</th>
+                <th class="py-3 px-3">항목</th>
+                <th class="py-3 px-3 text-right">실제 원화 지출</th>
+                <th class="py-3 px-3">상태 / 비고</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-600">
+              <tr>
+                <td data-label="구분" class="py-2.5 px-3 font-semibold text-slate-800">사전 지출</td>
+                <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">항공권 누적 수수료</td>
+                <td data-label="실제 원화 지출" class="py-2.5 px-3 text-right font-bold text-slate-900">180,000원</td>
+                <td data-label="상태 / 비고" class="py-2.5 px-3">확정 · 이미 지출</td>
+              </tr>
+              <tr>
+                <td data-label="구분" class="py-2.5 px-3 font-semibold text-slate-800">사전 지출</td>
+                <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">가는 편 항공권</td>
+                <td data-label="실제 원화 지출" class="py-2.5 px-3 text-right font-bold text-slate-900">409,600원</td>
+                <td data-label="상태 / 비고" class="py-2.5 px-3">확정 · 기결제</td>
+              </tr>
+              <tr>
+                <td data-label="구분" class="py-2.5 px-3 font-semibold text-slate-800">사전 지출</td>
+                <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">숙소 (베셀 캄파나 4박)</td>
+                <td data-label="실제 원화 지출" class="py-2.5 px-3 text-right font-bold text-slate-900">869,961원</td>
+                <td data-label="상태 / 비고" class="py-2.5 px-3">확정 · 기결제</td>
+              </tr>
+              <tr>
+                <td data-label="구분" class="py-2.5 px-3 font-semibold text-emerald-800">환전 지출</td>
+                <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">트래블카드 환전 완료 (50,000엔)</td>
+                <td data-label="실제 원화 지출" class="py-2.5 px-3 text-right font-bold text-slate-900">422,560원</td>
+                <td data-label="상태 / 비고" class="py-2.5 px-3">확정 · 실제 환전 원화액을 지출로 반영</td>
+              </tr>
+              <tr class="settlement-total bg-slate-900 text-white font-extrabold">
+                <td data-label="구분" class="py-3 px-3">현재까지 결산 합계</td>
+                <td data-label="항목" class="py-3 px-3">사전 지출 + 완료된 환전</td>
+                <td data-label="실제 원화 지출" class="py-3 px-3 text-right text-sky-300">1,882,121원</td>
+                <td data-label="상태 / 비고" class="py-3 px-3 text-slate-300">추가 발생 시 합계 갱신</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="rounded-xl border border-sky-200 bg-sky-50 p-3 sm:p-4 text-xs sm:text-sm text-sky-950 space-y-1.5 leading-relaxed">
+          <p class="font-extrabold">여행 후 결산 업데이트 방법</p>
+          <p>귀국 후 실제 결제한 귀국편·투어 등의 원화 금액과 추가 환전·충전에 사용한 원화 금액을 알려주시면 결산표에 추가해 최종 합계를 갱신합니다. 현지에서 실제 사용한 엔화 내역은 따로 기록하지 않습니다.</p>
+          <p><strong>회계 기준 참고:</strong> 이 결산은 요청하신 대로 환전·충전한 원화를 지출로 집계합니다. 따라서 여행 후 카드에 충전 잔액이 남으면, 이 합계는 순수한 소비액보다는 여행용으로 자금을 지출한 금액에 가깝습니다. 향후 여행 간 비용 규모를 비교할 때 이 기준을 동일하게 사용하면 됩니다.</p>
+        </div>
+      </section>
     </section>
 
     <!-- ========================================== -->
