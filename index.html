@@ -67,6 +67,119 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
+
+    /* Consistent payment labels and safe wrapping for long Korean/Japanese text. */
+    .pill-card, .pill-cash {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      white-space: nowrap;
+      line-height: 1.35;
+      max-width: 100%;
+    }
+    .day-card, .glass-card, #restaurantGrid > div { min-width: 0; }
+    .day-card h4, #restaurantGrid h5 {
+      min-width: 0;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: normal;
+      line-height: 1.4;
+    }
+    .day-card .flex.items-center.justify-between {
+      gap: .5rem;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+    .day-card .flex.items-center.justify-between > span:first-child {
+      min-width: 0;
+      flex: 1 1 12rem;
+      overflow-wrap: anywhere;
+      line-height: 1.45;
+    }
+    .day-card .flex.items-center.justify-between > .pill-card,
+    .day-card .flex.items-center.justify-between > .pill-cash {
+      flex: 0 0 auto;
+      margin-left: auto;
+    }
+    #restaurantGrid > div > div:first-child {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .5rem;
+      min-width: 0;
+    }
+    #restaurantGrid h5 { flex: 1 1 9rem; }
+    #restaurantGrid .pill-card, #restaurantGrid .pill-cash { margin-left: auto; }
+
+    /* Mobile-first usability: keep the guide readable while walking around Japan. */
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { overflow-x: hidden; }
+    button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+    .table-scroll { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+    .table-scroll table { min-width: 760px; }
+    .mobile-bottom-nav { display: none; }
+    .funding-metric { min-width: 0; overflow-wrap: anywhere; }
+    .funding-number { font-variant-numeric: tabular-nums; letter-spacing: -0.035em; }
+
+    @media (max-width: 767px) {
+      header { position: sticky; top: 0; }
+      header > div { height: auto !important; min-height: 58px; padding: 10px 14px; }
+      header nav:not(.mobile-bottom-nav) { display: none !important; }
+      header h1 { font-size: 1rem !important; }
+      header p { font-size: 0.65rem !important; }
+      main { padding: 1rem 0.8rem 1.25rem !important; gap: 1.25rem !important; }
+      main > section { min-width: 0; }
+      .day-card, .glass-card { border-radius: 1rem; }
+      .day-card { padding: 1rem !important; }
+      .day-card > div:first-child { min-width: 0; }
+      .day-card > div:first-child > div:first-child { min-width: 0; flex-wrap: wrap; gap: .45rem; }
+      .day-card h4 { flex: 1 1 100%; width: 100%; }
+      .day-card .flex.items-center.justify-between > span:first-child { flex: 1 1 100%; }
+      #restaurantGrid > div > div:first-child { align-items: flex-start; }
+      #restaurantGrid h5 { flex: 1 1 100%; }
+      #restaurantGrid .pill-card, #restaurantGrid .pill-cash { margin-left: 0; }
+
+      .day-card .text-xs { font-size: 0.82rem; line-height: 1.55; }
+      .day-card .text-\[11px\] { font-size: 0.74rem; line-height: 1.5; }
+      #tab-content-budget .text-xs { line-height: 1.55; }
+      #dayFilterGroup { width: 100%; max-width: 100%; justify-content: flex-start; padding-bottom: 6px; }
+      #dayFilterGroup button, .pay-filter-btn { min-height: 40px; flex: 0 0 auto; }
+      #tab-content-budget .overflow-x-auto { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      #tab-content-budget table { min-width: 760px; }
+      #tab-content-budget th, #tab-content-budget td { padding-left: 10px !important; padding-right: 10px !important; }
+      #tab-content-budget .rounded-xl.border.bg-amber-50 { padding: 12px; }
+      .mobile-bottom-nav {
+        position: fixed; z-index: 80; left: 0; right: 0; bottom: 0;
+        display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3px; padding: 7px 7px calc(7px + env(safe-area-inset-bottom));
+        background: rgba(10, 25, 47, 0.97); border-top: 1px solid rgba(148,163,184,.25);
+        backdrop-filter: blur(14px); box-shadow: 0 -8px 24px rgba(15,23,42,.12);
+      }
+      .mobile-bottom-nav button {
+        min-width: 0; min-height: 48px; display: flex; flex-direction: column;
+        align-items: center; justify-content: center; gap: 3px; border-radius: 10px;
+        color: #cbd5e1; font-size: 0.68rem; font-weight: 700; line-height: 1.1;
+      }
+      .mobile-bottom-nav button .nav-icon { font-size: 1.05rem; }
+      .mobile-bottom-nav button.active { color: #fff; background: #0284c7; }
+      body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+      footer { padding-bottom: calc(1.5rem + 76px + env(safe-area-inset-bottom)) !important; }
+      .funding-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+      .funding-number { font-size: 1.22rem !important; }
+      .hero-badges { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      header > div { padding-left: 18px; padding-right: 18px; }
+      header nav { gap: 3px !important; }
+      header nav button { padding-left: 8px !important; padding-right: 8px !important; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
   </style>
 </head>
 <body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col">
@@ -115,7 +228,7 @@
       </p>
 
       <!-- Key Trip Info Badges -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto text-left">
+      <div class="hero-badges grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto text-left">
         <div class="bg-white/5 border border-white/10 p-3 rounded-xl">
           <p class="text-[11px] text-sky-300 font-medium">🗓️ 여행 기간</p>
           <p class="text-xs sm:text-sm font-bold text-white mt-0.5">2027.01.26 ~ 01.30</p>
@@ -132,9 +245,9 @@
           <span class="text-[10px] text-slate-400">카이센동 뷔페 & 대욕장 온천</span>
         </div>
         <div class="bg-white/5 border border-white/10 p-3 rounded-xl">
-          <p class="text-[11px] text-sky-300 font-medium">💵 현금 인출 계획</p>
-          <p class="text-xs sm:text-sm font-bold text-white mt-0.5">공항 ATM 30,000엔</p>
-          <span class="text-[10px] text-slate-400">교통카드 1.1만 + 숙박세 + 맛집</span>
+          <p class="text-[11px] text-sky-300 font-medium">💳 트래블카드 환전 계획</p>
+          <p class="text-xs sm:text-sm font-bold text-white mt-0.5">총 200,000엔 목표</p>
+          <span class="text-[10px] text-slate-400">출발 전 20만엔 충전 · 현지 ATM 3만엔 출금</span>
         </div>
       </div>
     </div>
@@ -154,12 +267,12 @@
           <h3 class="text-lg font-bold text-slate-900">일차별 세부 타임라인</h3>
         </div>
         <div class="flex items-center gap-1 overflow-x-auto no-scrollbar py-1" id="dayFilterGroup">
-          <button onclick="filterDayCards('all')" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-slate-800 text-white">전체</button>
-          <button onclick="filterDayCards('1')" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">1일차</button>
-          <button onclick="filterDayCards('2')" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">2일차</button>
-          <button onclick="filterDayCards('3')" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">3일차</button>
-          <button onclick="filterDayCards('4')" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">4일차</button>
-          <button onclick="filterDayCards('5')" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">5일차</button>
+          <button onclick="filterDayCards('all', this)" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-slate-800 text-white">전체</button>
+          <button onclick="filterDayCards('1', this)" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">1일차</button>
+          <button onclick="filterDayCards('2', this)" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">2일차</button>
+          <button onclick="filterDayCards('3', this)" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">3일차</button>
+          <button onclick="filterDayCards('4', this)" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">4일차</button>
+          <button onclick="filterDayCards('5', this)" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">5일차</button>
         </div>
       </div>
 
@@ -169,10 +282,10 @@
           <div class="flex items-center gap-3">
             <span class="px-2.5 py-1 bg-sky-100 text-sky-800 text-xs font-extrabold rounded-md">Day 1</span>
             <span class="text-sm font-semibold text-slate-500">2027.01.26 (화)</span>
-            <h4 class="text-base font-bold text-slate-900">시내 사전 쇼핑 & 생양고기 본즈 예약 & 심야 라멘</h4>
+            <h4 class="text-base font-bold text-slate-900">시내 사전 쇼핑 & 야끼니꾸 츠바메 & 심야 라멘</h4>
           </div>
           <span class="text-xs font-semibold text-sky-700 bg-sky-50 border border-sky-200 px-2.5 py-1 rounded-md">
-            입국·이동 여유 확보 • 징기스칸 18:00 예약
+            입국·이동 여유 확보 • 저녁: 야끼니꾸 츠바메
           </span>
         </div>
 
@@ -183,14 +296,14 @@
               <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오전 (10:20 ~)</span>
               <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
                 <li>• <strong>10:20 신치토세 공항 도착</strong> 및 입국 수속</li>
-                <li>• 입국 수속 후 세븐뱅크 ATM에서 <strong>필요 현금 출금</strong> (30,000엔은 예산안 기준)</li>
+                <li>• 세븐뱅크 ATM에서 트래블카드로 <strong>30,000엔 출금 예정</strong>. 출발 전 충전 목표 20만엔에 포함된 금액이므로 별도 예산으로 중복 계산하지 않기</li>
                 <li>• 이코카·파스모 각 5,000엔 충전은 실제 교통비 계획에 맞춰 조정</li>
               </ul>
             </div>
             <div class="mt-3 pt-2.5 border-t border-slate-200">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-slate-800">🍛 [중식] 스프카레 라비</span>
-                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제</span>
+                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제 가능</span>
               </div>
               <p class="text-[11px] text-slate-500 mt-0.5">입국 수속·ATM·교통카드 충전 후 공항에서 식사. 대기 상황에 따라 메뉴/시간 조정</p>
             </div>
@@ -210,7 +323,7 @@
             <div class="mt-3 pt-2.5 border-t border-slate-200">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-slate-800">🥧 [간식] 키노토야 베이크</span>
-                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제</span>
+                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제 가능</span>
               </div>
               <p class="text-[11px] text-slate-500 mt-0.5">지하상가 폴타운 갓 구운 치즈타르트</p>
             </div>
@@ -219,17 +332,17 @@
           <!-- Evening & Night -->
           <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
             <div class="space-y-2">
-              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">저녁 & 심야 야식</span>
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">저녁 & 심야 야식 (시간 유동)</span>
               <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
-                <li>• 18:00 예약 맞춰 입장해 대기 없이 따뜻하게 식사</li>
-                <li>• 식후 오도리 공원 & 삿포로 TV타워 눈 덮인 야경 산책</li>
-                <li>• 숙소 휴식 후 밤 21:30 스스키노 밤거리 산책</li>
+                <li>• 입국 수속·숙소 이동·쇼핑 진행 상황에 맞춰 저녁 시간을 유동적으로 운영</li>
+                <li>• <strong>야끼니꾸 츠바메</strong>에서 저녁 식사 (영업 시작 시각과 예약 필요 여부는 방문 전 확인)</li>
+                <li>• 식후 오도리 공원 & 삿포로 TV타워 설경 야경 산책. 라멘신겐은 체력과 대기 상황에 따라 선택</li>
               </ul>
             </div>
             <div class="mt-3 pt-2.5 border-t border-slate-200 space-y-1.5">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-slate-800">🥩 [석식] 아라타나루 본즈 (18:00 예약)</span>
-                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제</span>
+                <span class="text-xs font-bold text-slate-800">🥩 [석식] 야끼니꾸 츠바메 (燕) 남5조 스스키노점</span>
+                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제 가능</span>
               </div>
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-slate-800">🍜 [야식] 라멘신겐 (에치고+차한)</span>
@@ -246,10 +359,10 @@
           <div class="flex items-center gap-3">
             <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-md">Day 2</span>
             <span class="text-sm font-semibold text-slate-500">2027.01.27 (수)</span>
-            <h4 class="text-base font-bold text-slate-900">다이마루 오픈런, 몽벨 & 카페 휴식, 츠바메야 와규 & 모이와산 야경</h4>
+            <h4 class="text-base font-bold text-slate-900">다이마루 오픈런, 몽벨 & 카페 휴식, 스아게 & 모이와산 야경</h4>
           </div>
           <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-md">
-            실내 쇼핑 & 쾌적한 와규 식사
+            실내 쇼핑 & 스프카레 • 야경
           </span>
         </div>
 
@@ -268,7 +381,7 @@
             <div class="mt-3 pt-2.5 border-t border-slate-200">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-slate-800">👜 [쇼핑] 셀린느(Celine) 지갑</span>
-                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제</span>
+                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제 가능</span>
               </div>
               <p class="text-[11px] text-slate-500 mt-0.5">면세/환급 가능 여부와 필요 영수증·절차를 매장에서 확인</p>
             </div>
@@ -288,7 +401,7 @@
             <div class="mt-3 pt-2.5 border-t border-slate-200">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-slate-800">☕ [카페] Roquefort Cafe</span>
-                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드/현금</span>
+                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드·현금 가능</span>
               </div>
               <p class="text-[11px] text-slate-500 mt-0.5">분위기 좋은 핸드드립 로스터리 명소</p>
             </div>
@@ -297,21 +410,22 @@
           <!-- Evening -->
           <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
             <div class="space-y-2">
-              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">저녁 & 밤 (16:00 ~)</span>
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">저녁 & 밤 (16:30 ~)</span>
               <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
-                <li>• 16:30 일몰에 맞춰 <strong>모이와산 로프웨이</strong> 탑승</li>
-                <li>• 일본 3대 야경 정상 파노라마 설경 감상</li>
-                <li>• 스스키노 숙소 인근으로 복귀해 쾌적한 와규 식사</li>
+                <li>• 16:30 전후 <strong>모이와산 로프웨이</strong> 탑승, 겨울 운행 상황과 마지막 탑승 시각은 당일 확인</li>
+                <li>• 정상에서 삿포로 시내 야경과 설경 감상</li>
+                <li>• 18:30~19:00 전후 스스키노 복귀 후 <strong>스아게+ 본점</strong>에서 저녁. 혼잡으로 대기할 수 있으니 너무 늦어지지 않도록 운영</li>
               </ul>
             </div>
             <div class="mt-3 pt-2.5 border-t border-slate-200 space-y-1.5">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-slate-800">🥩 [석식] 츠바메야 (燕屋)</span>
-                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제</span>
+                <span class="text-xs font-bold text-slate-800">🍛 [석식] 스아게 플러스 (Suage+) 본점</span>
+                <span class="pill-cash px-2 py-0.5 rounded text-[10px] font-bold">현금/PayPay · 신용카드 불가</span>
               </div>
+              <p class="text-[11px] text-slate-500">수요일 기준 공식 안내: 21:00 종료·20:30 라스트오더, 사전 예약 불가. 대기 상황을 고려해 복귀 후 바로 방문</p>
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-slate-800">🍨 [디저트] 파르페, 커피, 술, 사토</span>
-                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제</span>
+                <span class="text-xs font-bold text-slate-800">🍨 [선택 디저트] 파르페, 커피, 술, 사토</span>
+                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">결제 수단 사전 확인</span>
               </div>
             </div>
           </div>
@@ -324,10 +438,10 @@
           <div class="flex items-center gap-3">
             <span class="px-2.5 py-1 bg-amber-100 text-amber-800 text-xs font-extrabold rounded-md">Day 3</span>
             <span class="text-sm font-semibold text-slate-500">2027.01.28 (목)</span>
-            <h4 class="text-base font-bold text-slate-900">비에이 & 후라노 늦출 버스투어 & 스아게 본점</h4>
+            <h4 class="text-base font-bold text-slate-900">비에이 & 후라노 버스투어 & 생양고기 징기스칸</h4>
           </div>
           <span class="text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-md">
-            설경 투어 • 스아게 본점 스프카레
+            설경 투어 • 복귀 후 생양고기 징기스칸
           </span>
         </div>
 
@@ -374,19 +488,19 @@
           <!-- Evening -->
           <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
             <div class="space-y-2">
-              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">저녁 삿포로 복귀 (20:30 ~)</span>
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">저녁 삿포로 복귀 (20:30~21:00 예상)</span>
               <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
-                <li>• 버스에서 휴식하며 삿포로 스스키노 복귀</li>
-                <li>• 도로·기상 상황에 따라 복귀가 늦어질 수 있으므로 저녁은 유동 일정으로 운영</li>
-                <li>• 숙소(베셀 캄파나) 도보 5분 거리라 복귀 매우 편리</li>
+                <li>• 버스에서 휴식하며 삿포로 스스키노로 복귀 (도로·기상 상황에 따라 변동 가능)</li>
+                <li>• <strong>아라타나루 본즈 스스키노 본점</strong>은 21:15~21:30대 예약 가능 여부를 사전에 확인</li>
+                <li>• 투어 복귀가 지연되면 식당에 전화로 연락하고, 숙소 복귀 후 도보 이동</li>
               </ul>
             </div>
             <div class="mt-3 pt-2.5 border-t border-slate-200">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-slate-800">🍛 [석식 후보] 스아게 플러스 (Suage+) 본점</span>
-                <span class="pill-cash px-2 py-0.5 rounded text-[10px] font-bold">현금 필수</span>
+                <span class="text-xs font-bold text-slate-800">🥩 [석식] 아라타나루 본즈 스스키노 본점 (생양고기 징기스칸)</span>
+                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제 가능</span>
               </div>
-              <p class="text-[11px] text-slate-500 mt-0.5">방문 당일 영업 종료·라스트오더를 확인하고, 늦으면 숙소 인근 대체 식당으로 변경</p>
+              <p class="text-[11px] text-slate-500 mt-0.5">현재 공식 안내상 자정까지 영업·음식 라스트오더 23:30. 예약 시간을 확정하고, 버스 지연 시 매장에 직접 연락</p>
             </div>
           </div>
         </div>
@@ -420,7 +534,7 @@
             <div class="mt-3 pt-2.5 border-t border-slate-200">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-slate-800">🎟️ [입장료] 오타루 수족관</span>
-                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제</span>
+                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제 가능</span>
               </div>
               <p class="text-[11px] text-slate-500 mt-0.5">2인 약 2,600엔 (버스비는 IC카드 태그)</p>
             </div>
@@ -459,7 +573,7 @@
             <div class="mt-3 pt-2.5 border-t border-slate-200">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-slate-800">🍜 [석식] 테시카가 라멘</span>
-                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제</span>
+                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제 가능</span>
               </div>
               <p class="text-[11px] text-slate-500 mt-0.5">라멘요코초 내 옥수수 콘버터 미소라멘 명가</p>
             </div>
@@ -515,9 +629,9 @@
         </div>
         <!-- Filter Buttons -->
         <div class="flex items-center gap-1.5">
-          <button onclick="filterPayment('all')" class="pay-filter-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-slate-800 text-white">전체</button>
-          <button onclick="filterPayment('cash')" class="pay-filter-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100">현금 필수만 ⚠️</button>
-          <button onclick="filterPayment('card')" class="pay-filter-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100">카드 가능 ⭕</button>
+          <button onclick="filterPayment('all', this)" class="pay-filter-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-slate-800 text-white">전체</button>
+          <button onclick="filterPayment('cash', this)" class="pay-filter-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100">현금 필수만 ⚠️</button>
+          <button onclick="filterPayment('card', this)" class="pay-filter-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100">카드 결제 가능 ⭕</button>
         </div>
       </div>
 
@@ -528,11 +642,11 @@
         <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="card">
           <div class="flex items-center justify-between">
             <h5 class="font-bold text-sm text-slate-900">아라타나루 본즈 스스키노 본점</h5>
-            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 가능</span>
+            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제 가능</span>
           </div>
-          <p class="text-xs text-emerald-600 font-semibold">⭐ 4.6 (리뷰 약 800개) • 1일차 18:00 사전 예약</p>
+          <p class="text-xs text-emerald-600 font-semibold">3일차 저녁 • 21:15~21:30대 예약 가능 여부 확인</p>
           <p class="text-xs text-slate-600 leading-snug">
-            다루마 대비 환기와 위생이 뛰어나며 잡내 없는 고급 냉장 생양고기(생 숄더로스, 램찹) 전문점. 추위 없이 입장 가능.
+            생양고기 징기스칸 전문점. 현재 공식 안내상 월~금 17:00~24:00, 음식 라스트오더 23:30입니다. 투어 복귀 예상(20:30~21:00)에 맞춰 21:15~21:30대 예약 가능 여부를 확인하고, 버스 지연 시 매장에 전화로 연락하세요. <a href="https://akr3385859945.owst.jp/" target="_blank" rel="noopener noreferrer" class="text-sky-700 underline font-semibold">공식 사이트·예약</a>
           </p>
         </div>
 
@@ -552,7 +666,7 @@
         <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="card">
           <div class="flex items-center justify-between">
             <h5 class="font-bold text-sm text-slate-900">네무로 하나마루 (스텔라 6F)</h5>
-            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 가능</span>
+            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제 가능</span>
           </div>
           <p class="text-xs text-emerald-600 font-semibold">⭐ 4.3 (리뷰 약 4,200개) • 2일차 점심</p>
           <p class="text-xs text-slate-600 leading-snug">
@@ -563,12 +677,12 @@
         <!-- 4. 츠바메야 -->
         <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="card">
           <div class="flex items-center justify-between">
-            <h5 class="font-bold text-sm text-slate-900">츠바메야 (燕屋) 스스키노</h5>
-            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 가능</span>
+            <h5 class="font-bold text-sm text-slate-900">야끼니꾸 츠바메 (燕) 남5조 스스키노점</h5>
+            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제 가능</span>
           </div>
-          <p class="text-xs text-emerald-600 font-semibold">⭐ 4.2 (리뷰 약 900개) • 2일차 저녁</p>
+          <p class="text-xs text-emerald-600 font-semibold">1일차 저녁</p>
           <p class="text-xs text-slate-600 leading-snug">
-            스스키노 중심, 숙소 인근 와규 야키니쿠. 주류 강요 없이 쾌적한 룸/칸막이석에서 소고기 식사에 집중 가능.
+            공식 매장명: 個室焼肉つばめ（燕）南5条すすきの店. 주소는 南5条西5丁目・五五ビル 2F입니다. 출발 전 방문 날짜의 영업시간과 예약 가능 시간을 공식 페이지에서 재확인하세요. <a href="https://tubame5.owst.jp/" target="_blank" rel="noopener noreferrer" class="text-sky-700 underline font-semibold">공식 사이트·예약</a>
           </p>
         </div>
 
@@ -576,7 +690,7 @@
         <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="card">
           <div class="flex items-center justify-between">
             <h5 class="font-bold text-sm text-slate-900">파르페, 커피, 술, 사토 (佐藤)</h5>
-            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 가능</span>
+            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제 가능</span>
           </div>
           <p class="text-xs text-emerald-600 font-semibold">⭐ 4.1 (리뷰 약 2,300개) • 2일차 밤 디저트</p>
           <p class="text-xs text-slate-600 leading-snug">
@@ -614,9 +728,9 @@
             <h5 class="font-bold text-sm text-slate-900">스아게 플러스 (Suage+) 본점</h5>
             <span class="pill-cash px-2 py-0.5 rounded text-[10px] font-bold">현금 필수 ⚠️</span>
           </div>
-          <p class="text-xs text-amber-600 font-semibold">⭐ 4.2 (리뷰 약 4,800개) • 3일차 저녁</p>
+          <p class="text-xs text-amber-600 font-semibold">2일차 저녁</p>
           <p class="text-xs text-slate-600 leading-snug">
-            해외 카드 불가(현금 전용). 삿포로 3대 스프카레. 닭다리/채소 꼬치와 맑고 깊은 육수. 숙소 도보 5분 거리.
+            신용카드 결제 불가, 현금 또는 PayPay 결제. 수요일 기준 현재 공식 안내는 11:30~21:00, 라스트오더 20:30이며 사전 예약은 받지 않습니다. 혼잡 시 대기·라스트오더 변동 가능성이 있어 2일차 야경 후 너무 늦지 않게 방문하세요. <a href="https://suage.mom/stores/suage-plus/" target="_blank" rel="noopener noreferrer" class="text-sky-700 underline font-semibold">공식 사이트·영업 안내</a>
           </p>
         </div>
 
@@ -628,7 +742,7 @@
           </div>
           <p class="text-xs text-amber-600 font-semibold">⭐ 4.3 (리뷰 약 650개) • 4일차 오타루 점심</p>
           <p class="text-xs text-slate-600 leading-snug">
-            현지인들이 줄 서는 숯불 부타동 노포. 카드 결제 미지원. 14:30 라스트 오더 주의 (2인 약 2,000엔 현금 준비).
+            현지인들이 줄 서는 숯불 부타동 노포. 카드 결제 불가. 14:30 라스트 오더 주의 (2인 약 2,000엔 현금 준비).
           </p>
         </div>
 
@@ -636,7 +750,7 @@
         <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="card">
           <div class="flex items-center justify-between">
             <h5 class="font-bold text-sm text-slate-900">라멘요코초 '테시카가 라멘'</h5>
-            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 가능</span>
+            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제 가능</span>
           </div>
           <p class="text-xs text-emerald-600 font-semibold">⭐ 4.3 (리뷰 약 1,900개) • 4일차 저녁</p>
           <p class="text-xs text-slate-600 leading-snug">
@@ -648,7 +762,7 @@
         <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="card">
           <div class="flex items-center justify-between">
             <h5 class="font-bold text-sm text-slate-900">오타루 디저트 (르타오/키타카로/카마에이)</h5>
-            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 가능</span>
+            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제 가능</span>
           </div>
           <p class="text-xs text-emerald-600 font-semibold">⭐ 4.3 ~ 4.4 • 4일차 오후 디저트 로드</p>
           <p class="text-xs text-slate-600 leading-snug">
@@ -660,7 +774,7 @@
         <div class="glass-card p-4 rounded-xl border border-slate-200 space-y-2" data-pay="card">
           <div class="flex items-center justify-between">
             <h5 class="font-bold text-sm text-slate-900">공항 라비 & 키노토야 베이크</h5>
-            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 가능</span>
+            <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드 결제 가능</span>
           </div>
           <p class="text-xs text-emerald-600 font-semibold">⭐ 4.1 ~ 4.3 • 1일차 공항/지하상가</p>
           <p class="text-xs text-slate-600 leading-snug">
@@ -681,23 +795,67 @@
             <span class="text-xl">💰</span>
             <h3 class="text-lg font-bold text-slate-900">4박 5일 2인 최종 여행 예산표</h3>
           </div>
-          <p class="text-xs text-slate-500 mt-0.5">매몰 수수료 18만 원과 조식 포함 숙소가 반영되었습니다. 귀국편·투어는 예정 금액이며, 환급 전 총액을 기준으로 예산을 준비하세요.</p>
+          <p class="text-xs text-slate-500 mt-0.5">매몰 수수료 18만 원과 조식 포함 숙소 반영. 현지 비용에는 선택 쇼핑 예상치가 포함되며, 트래블카드 충전액은 지출과 중복 합산하지 않습니다.</p>
         </div>
         <div class="text-right">
-          <span class="text-xs text-slate-500">예상 실부담액:</span>
-          <span class="text-base sm:text-lg font-extrabold text-sky-700">환급 전 약 390만 ~ 413만 원</span>
+          <span class="text-xs text-slate-500">총여행 예산 (환급 전):</span>
+          <span class="text-base sm:text-lg font-extrabold text-sky-700">약 390만 ~ 413만 원</span>
         </div>
       </div>
+
+      <!-- Travel-card funding is a source of funds, not an extra travel expense. -->
+      <section class="glass-card rounded-2xl border border-sky-200 bg-sky-50/60 p-4 sm:p-5 space-y-4" aria-labelledby="funding-title">
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+          <div>
+            <h4 id="funding-title" class="text-base sm:text-lg font-extrabold text-slate-900">💳 환전·트래블카드 충전 현황</h4>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1">충전은 지출이 아니라 결제용 자금 이동입니다. 아래 금액을 여행비 합계에 다시 더하면 현지 구매액과 중복 계산될 수 있습니다.</p>
+          </div>
+          <span class="inline-flex w-fit rounded-full bg-white border border-sky-200 px-3 py-1 text-[11px] font-bold text-sky-800">추가 신용카드 사용 없이 운영 목표</span>
+        </div>
+        <div class="funding-grid grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
+          <div class="funding-metric rounded-xl bg-white border border-slate-200 p-3">
+            <p class="text-[11px] text-slate-500 font-bold">충전 완료</p>
+            <p class="funding-number text-xl font-black text-slate-900 mt-1">50,000엔</p>
+            <p class="text-xs font-bold text-emerald-700 mt-1">실제 환전 422,560원</p>
+          </div>
+          <div class="funding-metric rounded-xl bg-white border border-slate-200 p-3">
+            <p class="text-[11px] text-slate-500 font-bold">추가 충전 예정</p>
+            <p class="funding-number text-xl font-black text-slate-900 mt-1">150,000엔</p>
+            <p class="text-xs font-bold text-amber-700 mt-1">약 1,267,680원*</p>
+          </div>
+          <div class="funding-metric rounded-xl bg-white border border-sky-200 p-3">
+            <p class="text-[11px] text-sky-700 font-bold">출발 전 충전 목표</p>
+            <p class="funding-number text-xl font-black text-slate-900 mt-1">200,000엔</p>
+            <p class="text-xs font-bold text-sky-700 mt-1">약 1,690,240원*</p>
+          </div>
+          <div class="funding-metric rounded-xl bg-white border border-amber-200 p-3">
+            <p class="text-[11px] text-amber-700 font-bold">현지 ATM 출금 예정</p>
+            <p class="funding-number text-xl font-black text-slate-900 mt-1">30,000엔</p>
+            <p class="text-xs font-bold text-amber-700 mt-1">약 253,536원*</p>
+          </div>
+          <div class="funding-metric rounded-xl bg-white border border-emerald-200 p-3">
+            <p class="text-[11px] text-emerald-700 font-bold">카드 결제용 잔액</p>
+            <p class="funding-number text-xl font-black text-slate-900 mt-1">170,000엔</p>
+            <p class="text-xs font-bold text-emerald-700 mt-1">약 1,436,704원*</p>
+          </div>
+        </div>
+        <div class="rounded-xl bg-white/90 border border-sky-100 p-3 sm:p-4 space-y-2 text-xs sm:text-sm text-slate-700 leading-relaxed">
+          <p><strong>* 환산 기준:</strong> 이미 환전한 50,000엔 = 422,560원 기준(1엔 약 8.4512원)으로 계산한 참고치입니다. 추가 환전 시 실제 환율·수수료 및 ATM 출금 수수료에 따라 원화 지출은 달라집니다.</p>
+          <p><strong>현지 사용 계획:</strong> 출발 전 총 200,000엔을 충전한 뒤, 현지에서 30,000엔을 ATM으로 인출하고 남은 <strong>170,000엔은 트래블카드 결제용</strong>으로 사용합니다. 현금 인출은 같은 충전 잔액의 일부를 현금으로 바꾸는 것이므로 별도 예산으로 더하지 않습니다.</p>
+          <p><strong>쇼핑 예상치는 상한 시나리오:</strong> 현지 지출 예상 180만~204만원에는 셀린느·스투시·휴먼메이드·돈키호테 등 선택 쇼핑이 포함되어 있습니다. 구매하지 않거나 금액을 줄이면 실제 지출도 감소하므로, 현지 예산과 충전 목표를 동일하게 볼 필요는 없습니다.</p>
+          <p class="font-semibold text-sky-900">운영 방침: 우선 20만엔으로 출발하고, 필수 지출과 실제 쇼핑 금액을 확인한 뒤 부족할 때만 현지에서 추가 충전합니다. 신용카드 추가 사용이나 선택 쇼핑을 전제로 미리 과충전하지 않습니다.</p>
+        </div>
+      </section>
 
       <!-- Budget 3-Card Summary Grid -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="glass-card p-4 rounded-xl border border-sky-200 bg-sky-50/40">
-          <p class="text-xs font-bold text-sky-800">사전 확정 + 예정 고정비</p>
+          <p class="text-xs font-bold text-sky-800">확정·예정 고정비</p>
           <p class="text-2xl font-black text-slate-900 mt-1">2,099,561원</p>
           <p class="text-[11px] text-slate-500 mt-1">항공권(수수료 18만 포함) + 베셀 4박(조식) + 투어</p>
         </div>
         <div class="glass-card p-4 rounded-xl border border-amber-200 bg-amber-50/40">
-          <p class="text-xs font-bold text-amber-800">현지 결제 필요액 (소비세 10% 포함)</p>
+          <p class="text-xs font-bold text-amber-800">현지 지출 예상액 (소비세 포함)</p>
           <p class="text-2xl font-black text-slate-900 mt-1">약 180만 ~ 204만 원</p>
           <p class="text-[11px] text-slate-500 mt-1">식비, 교통비, 셀린느 지갑, 의류, 입장료 등</p>
         </div>
@@ -708,15 +866,16 @@
         </div>
       </div>
       <div class="rounded-xl border border-amber-200 bg-amber-50 p-4 text-xs sm:text-sm text-amber-950 space-y-1.5">
-        <p class="font-extrabold">예산 합계 재계산</p>
-        <p>고정비 2,099,561원 + 현지 지출 1,800,300~2,035,300원 = <strong>환급 전 3,899,861~4,134,861원</strong>.</p>
-        <p>환급 110,000원을 전액 받는다고 가정하면 <strong>3,789,861~4,024,861원</strong>이지만, 환급액은 확정되지 않았으므로 여행 예산은 환급 전 금액으로 준비하는 편이 안전합니다.</p>
-        <p>항공 귀국편 450,000원과 비에이 투어 190,000원은 아직 예정 금액이므로 실제 결제액으로 업데이트하세요.</p>
+        <p class="font-extrabold">총여행 예산 합계 (환전 충전액 중복 제외)</p>
+        <p>고정비 2,099,561원 + 현지 지출 추정 1,800,300~2,035,300원 = <strong>환급 전 3,899,861~4,134,861원</strong>.</p>
+        <p>환급 110,000원을 전액 받는다고 가정하면 <strong>3,789,861~4,024,861원</strong>이지만, 환급액은 확정되지 않았으므로 환급 전 금액을 기준으로 예산을 관리하세요.</p>
+        <p>이 현지 지출 추정에는 선택 쇼핑 상단까지 포함되어 있어 실제 총액은 더 낮아질 수 있습니다. 트래블카드 충전 목표는 200,000엔(기존 50,000엔 포함)이며, 현지 ATM 현금 30,000엔과 카드 결제 잔액 170,000엔으로 나누어 사용합니다. 충전액을 총여행 예산에 다시 더하지 않습니다.</p>
+        <p>항공 귀국편 450,000원과 비에이 투어 190,000원은 아직 예정 금액이므로 실제 결제액으로 업데이트하세요. 추가 충전은 현지에서 필수 지출·구매 금액을 확인한 뒤 필요할 때만 진행합니다.</p>
       </div>
 
       <!-- Detailed Breakdown Table -->
       <div class="glass-card rounded-xl border border-slate-200 overflow-hidden">
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto table-scroll" aria-label="예산표: 좌우로 밀어 상세 항목 확인">
           <table class="w-full text-left text-xs sm:text-sm">
             <thead class="bg-slate-100/80 text-slate-700 font-bold border-b border-slate-200">
               <tr>
@@ -778,7 +937,7 @@
                 <td class="py-2.5 px-4 font-medium text-slate-900">미식, 간식, 파르페 (4.5일)</td>
                 <td class="py-2.5 px-4 text-slate-500">카드 + 현금</td>
                 <td class="py-2.5 px-4 text-right font-bold text-slate-900">약 450,000원</td>
-                <td class="py-2.5 px-4 text-slate-500">본즈, 스아게, 하나마루, 츠바메야 등</td>
+                <td class="py-2.5 px-4 text-slate-500">본즈, 스아게, 하나마루, 야끼니꾸 츠바메 등</td>
               </tr>
               <tr>
                 <td class="py-2.5 px-4 font-semibold text-slate-800" rowspan="3">쇼핑</td>
@@ -849,13 +1008,14 @@
         <!-- ATM Cash -->
         <div class="glass-card p-5 rounded-2xl border-l-4 border-l-amber-500 space-y-2">
           <h4 class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
-            <span class="text-base">💴</span> 공항 세븐뱅크 30,000엔 사용처 분배
+            <span class="text-base">💴</span> 현금 30,000엔 사용처 분배안
           </h4>
           <ul class="text-xs text-slate-600 space-y-1 leading-relaxed">
             <li>• <strong>교통카드 충전</strong>: 10,000엔 (아내 이코카 5천 + 남편 파스모 5천)</li>
             <li>• <strong>호텔 숙박세</strong>: 예산 기준 2,400엔 (1인 1박 300엔 × 2명 × 4박, 호텔에 실제 금액 확인)</li>
             <li>• <strong>현금 전용 맛집</strong>: 약 8,000엔 (준페이, 스아게, 라멘신겐, 로쿠미안)</li>
             <li>• <strong>여유 비상금</strong>: 약 9,600엔 잔여 (자판기 및 닝구르테라스)</li>
+            <li>• <strong>충전 잔액 배분</strong>: 출발 전 총 20만엔 중 3만엔을 현금으로 인출하고, 17만엔은 카드 결제용으로 남깁니다. ATM 수수료는 별도 확인하세요.</li>
           </ul>
         </div>
 
@@ -866,7 +1026,7 @@
             <li>• 귀국 항공편 실제 출발 시각·체크인 마감·위탁 수하물 규정</li>
             <li>• 비에이 투어에 준페이 식사 포함 여부 및 취소 규정</li>
             <li>• 숙박세 2,400엔 및 결제 수단, 교통카드 충전액</li>
-            <li>• 본즈 예약, 다이마루·네무로 하나마루·스아게 운영 시간/대기 방식</li>
+            <li>• 3일차 본즈 예약 시간(비에이 투어 복귀 후), 2일차 스아게 라스트오더·대기, 야끼니꾸 츠바메 영업시간</li>
             <li>• 쇼핑 품목별 면세 가능 여부와 환급 절차</li>
           </ul>
         </div>
@@ -896,6 +1056,13 @@
 
   </main>
 
+  <nav class="mobile-bottom-nav" aria-label="모바일 빠른 메뉴">
+    <button type="button" class="active" data-mobile-tab="itinerary" onclick="switchTab('itinerary')"><span class="nav-icon">🗓️</span><span>일정</span></button>
+    <button type="button" data-mobile-tab="restaurants" onclick="switchTab('restaurants')"><span class="nav-icon">🍜</span><span>맛집·결제</span></button>
+    <button type="button" data-mobile-tab="budget" onclick="switchTab('budget')"><span class="nav-icon">💴</span><span>예산</span></button>
+    <button type="button" data-mobile-tab="checklist" onclick="switchTab('checklist')"><span class="nav-icon">📌</span><span>체크</span></button>
+  </nav>
+
   <footer class="bg-sapporo-night text-slate-400 py-8 border-t border-slate-800 text-center text-xs mt-auto space-y-1">
     <p class="font-bold text-slate-300">❄️ 2027 SAPPORO : Winter Escape with My Love</p>
     <p>삿포로 • 오타루 • 비에이 4박 5일 로맨틱 설경 & 미식 투어</p>
@@ -909,9 +1076,7 @@
       panes.forEach(pane => pane.classList.add('hidden'));
 
       const targetPane = document.getElementById('tab-content-' + tabId);
-      if (targetPane) {
-        targetPane.classList.remove('hidden');
-      }
+      if (targetPane) targetPane.classList.remove('hidden');
 
       const buttons = document.querySelectorAll('.tab-btn');
       buttons.forEach(btn => {
@@ -924,10 +1089,16 @@
         activeBtn.classList.add('bg-sky-500', 'text-white', 'shadow-sm');
         activeBtn.classList.remove('text-slate-300', 'hover:text-white', 'hover:bg-slate-800/60');
       }
+      document.querySelectorAll('.mobile-bottom-nav button').forEach(btn => {
+        const active = btn.getAttribute('data-mobile-tab') === tabId;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-current', active ? 'page' : 'false');
+      });
+      window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     }
 
     // Day Cards Filter
-    function filterDayCards(day) {
+    function filterDayCards(day, clickedButton) {
       const cards = document.querySelectorAll('.day-card');
       const buttons = document.querySelectorAll('#dayFilterGroup .day-btn');
 
@@ -936,9 +1107,9 @@
         btn.classList.add('bg-white', 'text-slate-600');
       });
 
-      if (event && event.target) {
-        event.target.classList.add('bg-slate-800', 'text-white');
-        event.target.classList.remove('bg-white', 'text-slate-600');
+      if (clickedButton) {
+        clickedButton.classList.add('bg-slate-800', 'text-white');
+        clickedButton.classList.remove('bg-white', 'text-slate-600');
       }
 
       cards.forEach(card => {
@@ -951,15 +1122,15 @@
     }
 
     // Payment Filter in Tab 2
-    function filterPayment(type) {
+    function filterPayment(type, clickedButton) {
       const cards = document.querySelectorAll('#restaurantGrid > div');
       const buttons = document.querySelectorAll('.pay-filter-btn');
 
       buttons.forEach(btn => {
         btn.classList.remove('ring-2', 'ring-slate-800');
       });
-      if (event && event.target) {
-        event.target.classList.add('ring-2', 'ring-slate-800');
+      if (clickedButton) {
+        clickedButton.classList.add('ring-2', 'ring-slate-800');
       }
 
       cards.forEach(card => {
