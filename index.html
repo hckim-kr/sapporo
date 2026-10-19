@@ -211,6 +211,49 @@
       #tab-content-budget .budget-table tbody tr.row-funding-adjustment td { color: #3730a3 !important; font-weight: 700; }
       #tab-content-budget .budget-table tbody tr.row-funding-adjustment td::before { color: #4338ca; }
     }
+
+    /* Japan-local budget forecast table */
+    #localBudgetSection { scroll-margin-top: 84px; }
+    .local-table-wrap { width:100%; max-width:100%; overflow-x:auto; border:1px solid #e2e8f0; border-radius:16px; background:#fff; box-shadow:0 5px 16px rgba(15,23,42,.04); }
+    .local-budget-table { width:100%; min-width:760px; border-collapse:collapse; text-align:left; font-size:.82rem; }
+    .local-budget-table th, .local-budget-table td { padding:11px 12px; border-bottom:1px solid #e8edf4; vertical-align:top; overflow-wrap:anywhere; }
+    .local-budget-table thead th { background:#f1f5f9; color:#334155; font-size:.73rem; font-weight:850; white-space:nowrap; }
+    .local-budget-table tbody tr:last-child td { border-bottom:0; }
+    .local-budget-table .budget-group-row td { padding:9px 12px; font-weight:850; }
+    .local-budget-table .budget-subtotal td { background:#f8fafc; font-weight:800; color:#334155; }
+    .local-budget-table .budget-total td { background:#0f172a; color:#fff; font-weight:850; font-size:.88rem; }
+    .local-budget-table .budget-total td:nth-child(n+3) { color:#7dd3fc; }
+    .estimate-chip { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:.67rem; font-weight:850; white-space:nowrap; }
+    .estimate-chip.essential { background:#dcfce7; color:#166534; }
+    .estimate-chip.optional { background:#ede9fe; color:#5b21b6; }
+    .local-budget-metric { min-width:0; overflow-wrap:anywhere; }
+    .local-budget-metric strong { display:block; margin-top:4px; font-size:1.23rem; font-weight:900; letter-spacing:-.025em; font-variant-numeric:tabular-nums; }
+    .budget-help { color:#475569; font-size:.76rem; line-height:1.65; }
+    .budget-help li { margin-top:3px; }
+    @media (max-width:767px) {
+      /* Match the confirmed-cost table: stack each forecast row as a labeled card. */
+      .local-table-wrap { border:0; border-radius:0; background:transparent; box-shadow:none; overflow:visible; }
+      .local-budget-table { display:block; width:100%; min-width:0; font-size:.78rem; table-layout:fixed; }
+      .local-budget-table thead { display:none; }
+      .local-budget-table tbody { display:block; width:100%; }
+      .local-budget-table tbody tr.budget-group-row { display:block; width:100%; margin:18px 0 6px; padding:8px 12px; border:0; border-radius:8px; font-weight:800; font-size:.84rem; }
+      .local-budget-table tbody tr.budget-group-row td { display:block; padding:0 !important; border:0 !important; text-align:left !important; }
+      .local-budget-table tbody tr:not(.budget-group-row) { display:block; width:100%; margin:0 0 10px; padding:4px 0; border:1px solid #e2e8f0; border-radius:13px; background:#fff; box-shadow:0 4px 12px rgba(15,23,42,.035); overflow:hidden; }
+      .local-budget-table tbody tr:not(.budget-group-row) td { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; width:100%; min-width:0; padding:8px 12px !important; border:0 !important; border-bottom:1px solid #f1f5f9 !important; text-align:right !important; line-height:1.45; font-size:.82rem; }
+      .local-budget-table tbody tr:not(.budget-group-row) td::before { content:attr(data-label); display:block; flex:0 0 35%; min-width:0; text-align:left; color:#64748b; font-size:.72rem; font-weight:800; line-height:1.45; }
+      .local-budget-table tbody tr:not(.budget-group-row) td:last-child { border-bottom:0 !important; }
+      .local-budget-table tbody tr:not(.budget-group-row) td:nth-child(3),
+      .local-budget-table tbody tr:not(.budget-group-row) td:nth-child(4) { font-variant-numeric:tabular-nums; }
+      .local-budget-table tbody tr:not(.budget-group-row) td:first-child { font-weight:700; }
+      .local-budget-table tbody tr.budget-subtotal { background:#f8fafc; border-color:#cbd5e1; }
+      .local-budget-table tbody tr.budget-subtotal td { font-weight:700; color:#1e293b; }
+      .local-budget-table tbody tr.budget-total { background:#0f172a; border-color:#0f172a; }
+      .local-budget-table tbody tr.budget-total td { color:#fff !important; border-bottom:1px solid rgba(255,255,255,.12) !important; font-weight:800; font-size:.86rem; }
+      .local-budget-table tbody tr.budget-total td::before { color:#94a3b8; }
+      .local-budget-table tbody tr.budget-total td:nth-child(n+2) { color:#7dd3fc !important; }
+      .local-budget-metric strong { font-size:1.08rem; }
+    }
+
   </style>
 </head>
 <body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col">
@@ -235,7 +278,7 @@
           💳 결제·맛집
         </button>
         <button onclick="switchTab('budget')" id="btn-tab-budget" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition text-slate-300 hover:text-white hover:bg-slate-800/60">
-          💰 예산 · 결산
+          💰 예산안
         </button>
         <button onclick="switchTab('checklist')" id="btn-tab-checklist" class="tab-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition text-slate-300 hover:text-white hover:bg-slate-800/60">
           📌 핵심 팁
@@ -817,7 +860,7 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- TAB 3: 여행 통합 예산·결산 마스터 테이블 -->
+    <!-- TAB 3: 여행 예산안 -->
     <!-- ========================================== -->
     <section id="tab-content-budget" class="tab-pane hidden space-y-6">
       <div class="border-b border-slate-200 pb-3 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
@@ -935,6 +978,103 @@
           </ul>
         </div>
       </div>
+
+
+      <!-- Japan-local spending budget forecast. This is intentionally separate from the confirmed-cost total above. -->
+      <section id="localBudgetSection" class="space-y-4 pt-2">
+        <div class="border-b border-slate-200 pb-3 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xl">🇯🇵</span>
+              <h3 class="text-lg font-bold text-slate-900">일본 현지 사용 예산안 <span class="text-sm text-sky-700">(예상 비용)</span></h3>
+            </div>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">일정표의 식사·이동·관광·쇼핑 계획과 기존 예산 추정치를 바탕으로 정리했습니다. 아래 금액은 현지에서 쓸 예상액이며, 위의 현재 확정 반영액에 더하지 않습니다.</p>
+          </div>
+          <span class="text-[11px] text-slate-500">참고 환율: 1엔 ≈ 8.4512원</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="glass-card p-4 rounded-xl border border-emerald-200 bg-emerald-50/60 local-budget-metric">
+            <p class="text-xs font-bold text-emerald-800">현지 필수 경비 예상</p>
+            <strong class="text-emerald-950">78,129엔</strong>
+            <p class="text-[11px] text-emerald-700 mt-1">약 660,300원 · 숙박세·교통·식비·관광</p>
+          </div>
+          <div class="glass-card p-4 rounded-xl border border-violet-200 bg-violet-50/60 local-budget-metric">
+            <p class="text-xs font-bold text-violet-800">선택 쇼핑 예상</p>
+            <strong class="text-violet-950">134,893~162,700엔</strong>
+            <p class="text-[11px] text-violet-700 mt-1">약 1,140,000~1,375,000원</p>
+          </div>
+          <div class="glass-card p-4 rounded-xl border border-sky-300 bg-sky-50/70 local-budget-metric">
+            <p class="text-xs font-bold text-sky-800">현지 지출 예상 총액</p>
+            <strong class="text-sky-950">213,022~240,829엔</strong>
+            <p class="text-[11px] text-sky-700 mt-1">약 1,800,300~2,035,300원 · 선택 쇼핑 포함</p>
+          </div>
+        </div>
+
+        <div class="local-table-wrap">
+          <table aria-label="일본 현지 사용 예상 예산안" class="local-budget-table">
+<thead>
+<tr>
+<th>구분</th>
+<th>예상 사용 항목 / 일정 참고</th>
+<th class="text-right">예상 엔화</th>
+<th class="text-right">원화 환산 참고</th>
+<th>예산 성격</th>
+</tr>
+</thead>
+<tbody>
+<tr class="budget-group-row bg-emerald-50 text-emerald-900"><td colspan="5">💴 현지 필수 경비 · 여행 일정상 필요한 비용</td></tr>
+<tr data-budget-key="lodging">
+<td class="font-semibold text-slate-800" data-label="구분">현지 세금</td>
+<td data-label="예상 사용 항목 / 일정 참고"><strong class="text-slate-900">삿포로시 숙박세 (2인·4박)</strong><div class="text-[11px] text-slate-500 mt-1">Day 1 · 호텔 체크인 시 지불, 호텔에 실제 금액 확인</div></td>
+<td class="text-right font-bold" data-label="예상 엔화">2,400엔</td><td class="text-right" data-label="원화 환산 참고">약 20,300원</td><td data-label="예산 성격"><span class="estimate-chip essential">필수</span></td>
+</tr>
+<tr data-budget-key="transport">
+<td class="font-semibold text-slate-800" data-label="구분">현지 교통</td>
+<td data-label="예상 사용 항목 / 일정 참고"><strong class="text-slate-900">JR·지하철·버스 등</strong><div class="text-[11px] text-slate-500 mt-1">공항 왕복, 삿포로 시내, 오타루 수족관 버스 등</div></td>
+<td class="text-right font-bold" data-label="예상 엔화">약 13,016엔</td><td class="text-right" data-label="원화 환산 참고">약 110,000원</td><td data-label="예산 성격"><span class="estimate-chip essential">필수</span></td>
+</tr>
+<tr data-budget-key="food">
+<td class="font-semibold text-slate-800" data-label="구분">현지 식음</td>
+<td data-label="예상 사용 항목 / 일정 참고"><strong class="text-slate-900">식사·간식·디저트 (4.5일)</strong><div class="text-[11px] text-slate-500 mt-1">라비, 츠바메, 라멘신겐, 하나마루, 스아게, 준페이 등 일정 내 식사와 카페 포함 추정. 투어 점심 포함 여부 확인</div></td>
+<td class="text-right font-bold" data-label="예상 엔화">약 53,247엔</td><td class="text-right" data-label="원화 환산 참고">약 450,000원</td><td data-label="예산 성격"><span class="estimate-chip essential">필수</span></td>
+</tr>
+<tr data-budget-key="attractions">
+<td class="font-semibold text-slate-800" data-label="구분">관광·입장</td>
+<td data-label="예상 사용 항목 / 일정 참고"><strong class="text-slate-900">오타루 수족관·모이와산 로프웨이</strong><div class="text-[11px] text-slate-500 mt-1">Day 2·4 · 2인 예상</div></td>
+<td class="text-right font-bold" data-label="예상 엔화">약 9,466엔</td><td class="text-right" data-label="원화 환산 참고">약 80,000원</td><td data-label="예산 성격"><span class="estimate-chip essential">필수</span></td>
+</tr>
+<tr class="budget-subtotal"><td colspan="2" data-label="구분">현지 필수 경비 소계</td><td class="text-right" data-label="예상 엔화">78,129엔</td><td class="text-right" data-label="원화 환산 참고">약 660,300원</td><td data-label="예산 성격">필수 예상</td></tr>
+<tr class="budget-group-row bg-violet-50 text-violet-900"><td colspan="5">🛍️ 선택 쇼핑 · 구매 여부와 실제 상품에 따라 변동</td></tr>
+<tr data-budget-key="wallet">
+<td class="font-semibold text-slate-800" data-label="구분">선택 명품</td>
+<td data-label="예상 사용 항목 / 일정 참고"><strong class="text-slate-900">셀린느(Celine) 지갑</strong><div class="text-[11px] text-slate-500 mt-1">Day 2 · 다이마루 백화점, 소비세 포함 예상가</div></td>
+<td class="text-right font-bold" data-label="예상 엔화">56,797~65,080엔</td><td class="text-right" data-label="원화 환산 참고">480,000~550,000원</td><td data-label="예산 성격"><span class="estimate-chip optional">선택</span></td>
+</tr>
+<tr data-budget-key="apparel">
+<td class="font-semibold text-slate-800" data-label="구분">선택 패션</td>
+<td data-label="예상 사용 항목 / 일정 참고"><strong class="text-slate-900">스투시·휴먼메이드 의류</strong><div class="text-[11px] text-slate-500 mt-1">Day 1 등 · 오도리/다누키코지, 구매 여부에 따라 조정</div></td>
+<td class="text-right font-bold" data-label="예상 엔화">52,064~65,080엔</td><td class="text-right" data-label="원화 환산 참고">440,000~550,000원</td><td data-label="예산 성격"><span class="estimate-chip optional">선택</span></td>
+</tr>
+<tr data-budget-key="souvenirs">
+<td class="font-semibold text-slate-800" data-label="구분">선택 잡화</td>
+<td data-label="예상 사용 항목 / 일정 참고"><strong class="text-slate-900">돈키호테·몽벨·기념 과자</strong><div class="text-[11px] text-slate-500 mt-1">Day 2·4 · 현지에서 구매 품목 및 수량 결정</div></td>
+<td class="text-right font-bold" data-label="예상 엔화">26,032~32,540엔</td><td class="text-right" data-label="원화 환산 참고">220,000~275,000원</td><td data-label="예산 성격"><span class="estimate-chip optional">선택</span></td>
+</tr>
+<tr class="budget-subtotal"><td colspan="2" data-label="구분">선택 쇼핑 소계</td><td class="text-right" data-label="예상 엔화">134,893~162,700엔</td><td class="text-right" data-label="원화 환산 참고">1,140,000~1,375,000원</td><td data-label="예산 성격">구매 여부에 따라 감소</td></tr>
+<tr class="budget-total"><td colspan="2" data-label="구분">현지 지출 예상 총액 (필수 + 선택 쇼핑)</td><td class="text-right" data-label="예상 엔화">213,022~240,829엔</td><td class="text-right" data-label="원화 환산 참고">1,800,300~2,035,300원</td><td data-label="예산 성격">기확정 지출 합계와 별도</td></tr>
+</tbody>
+</table>
+        </div>
+        <div class="rounded-xl border border-amber-200 bg-amber-50/70 p-3.5 budget-help">
+          <p class="font-extrabold text-amber-950 mb-1">예산 해석 시 유의사항</p>
+          <ul class="list-disc pl-5">
+            <li>이 표는 현지에서 실제 사용하게 될 금액의 계획치입니다. 현재 확정 반영액 1,882,121원에 더해 총액을 계산하지 않습니다.</li>
+            <li>원화 예상액은 기존 예산안에 사용한 참고값이며, 실제 카드 청구 환율·현금 환전 비용과 차이가 날 수 있습니다.</li>
+          </ul>
+        </div>
+      </section>
+
     </section>
 
     <!-- ========================================== -->
@@ -1077,6 +1217,8 @@
         }
       });
     }
+
+
 
     // Payment Filter in Tab 2
     function filterPayment(type, clickedButton) {
