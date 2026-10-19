@@ -321,7 +321,7 @@
         <div class="bg-white/5 border border-white/10 p-3 rounded-xl">
           <p class="text-[11px] text-sky-300 font-medium">💳 트래블카드 환전 계획</p>
           <p class="text-xs sm:text-sm font-bold text-white mt-0.5">총 200,000엔 목표</p>
-          <span class="text-[10px] text-slate-400">출발 전 20만엔 충전 · 현지 ATM 3만엔 출금</span>
+          <span class="text-[10px] text-slate-400">현재 10만엔 충전 완료 · 목표 20만엔, 현지 ATM 3만엔 출금 예정</span>
         </div>
       </div>
     </div>
@@ -900,7 +900,7 @@
         </div>
         <div class="sm:text-right shrink-0">
           <span class="text-xs text-slate-500 block">현재 확정 반영액 (결제·충전)</span>
-          <strong class="text-lg font-extrabold text-sky-700">1,882,121원</strong>
+          <strong class="text-lg font-extrabold text-sky-700">2,303,396원</strong>
         </div>
       </div>
 
@@ -912,13 +912,13 @@
         </div>
         <div class="glass-card p-4 rounded-xl border border-sky-200 bg-sky-50/60">
           <p class="text-xs font-bold text-sky-800">2. 현지 사용금 충전 완료</p>
-          <p class="text-xl font-black text-slate-900 mt-1">422,560원</p>
-          <p class="text-[11px] text-sky-700 mt-0.5">트래블카드 50,000엔 · 재원으로 1회 반영</p>
+          <p class="text-xl font-black text-slate-900 mt-1">843,835원</p>
+          <p class="text-[11px] text-sky-700 mt-0.5">트래블카드 총 100,000엔 · 충전액 합산 반영</p>
         </div>
         <div class="glass-card p-4 rounded-xl border border-slate-300 bg-slate-50">
           <p class="text-xs font-bold text-slate-700">3. 현재 예산 반영 합계</p>
-          <p class="text-xl font-black text-slate-900 mt-1">1,882,121원</p>
-          <p class="text-[11px] text-slate-600 mt-0.5">현지 엔화 소비 예상액은 별도 합산하지 않음</p>
+          <p class="text-xl font-black text-slate-900 mt-1">2,303,396원</p>
+          <p class="text-[11px] text-slate-600 mt-0.5">충전 완료 100,000엔 합산 · 현지 소비 예상액은 별도 합산하지 않음</p>
         </div>
       </div>
 
@@ -969,16 +969,23 @@
             </tr>
             <tr>
               <td data-label="구분" class="py-2.5 px-3 font-semibold text-emerald-800">환전·충전</td>
-              <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">트래블카드 사전 충전 (50,000엔)</td>
+              <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">트래블카드 사전 충전 1차 (50,000엔)</td>
               <td data-label="확정 반영액 (원화)" class="py-2.5 px-3 text-right font-bold text-slate-900">422,560원</td>
               <td data-label="상태" class="py-2.5 px-3 text-emerald-700 font-semibold">충전 완료</td>
-              <td data-label="집계 기준" class="py-2.5 px-3">현지 소비가 아니라 사용 재원으로 1회 반영. 현지 엔화 결제액은 추가 합산하지 않음.</td>
+              <td data-label="집계 기준" class="py-2.5 px-3">2026.10.18 충전 · 사용 재원으로 1회 반영</td>
+            </tr>
+            <tr>
+              <td data-label="구분" class="py-2.5 px-3 font-semibold text-emerald-800">환전·충전</td>
+              <td data-label="항목" class="py-2.5 px-3 font-medium text-slate-900">트래블카드 추가 충전 2차 (50,000엔)</td>
+              <td data-label="확정 반영액 (원화)" class="py-2.5 px-3 text-right font-bold text-slate-900">421,275원</td>
+              <td data-label="상태" class="py-2.5 px-3 text-emerald-700 font-semibold">충전 완료</td>
+              <td data-label="집계 기준" class="py-2.5 px-3">2026.10.19 충전 · 사용 재원으로 1회 반영</td>
             </tr>
 
             <tr class="row-grand-total bg-slate-950 text-white font-black text-sm sm:text-base">
               <td data-label="구분" class="py-3.5 px-3 text-sky-300">현재 합계</td>
               <td data-label="항목" class="py-3.5 px-3">확정 지출 + 기충전액</td>
-              <td data-label="확정 반영액 (원화)" class="py-3.5 px-3 text-right text-sky-300 text-base sm:text-lg">1,882,121원</td>
+              <td data-label="확정 반영액 (원화)" class="py-3.5 px-3 text-right text-sky-300 text-base sm:text-lg">2,303,396원</td>
               <td data-label="상태" class="py-3.5 px-3 text-slate-300 font-medium" colspan="2">미확정 비용 및 현지 엔화 소비 예상액 제외</td>
             </tr>
           </tbody>
@@ -997,7 +1004,7 @@
         <div class="rounded-xl border border-sky-200 bg-sky-50/70 p-3.5 space-y-2 leading-relaxed">
           <p class="font-extrabold text-sky-950 flex items-center gap-1.5"><span>🧾</span> 중복 집계 방지 기준</p>
           <ul class="text-xs text-slate-700 space-y-1.5">
-            <li>• 현재 합계에는 이미 충전한 금액을 한 번만 반영했습니다.</li>
+            <li>• 현재 합계에는 완료된 두 차례 충전액을 각각 한 번만 반영했습니다.</li>
             <li>• 현지에서 엔화로 결제하더라도 해당 결제액을 이 예산표에 별도로 더하지 않습니다. 환전·충전해 둔 금액 안에서 지출을 관리합니다.</li>
             <li>• 추가 환전·충전이 실제로 완료되면 그때 확정 반영액을 갱신합니다.</li>
           </ul>
@@ -1094,7 +1101,7 @@
         <div class="rounded-xl border border-amber-200 bg-amber-50/70 p-3.5 budget-help">
           <p class="font-extrabold text-amber-950 mb-1">예산 해석 시 유의사항</p>
           <ul class="list-disc pl-5">
-            <li>이 표는 현지에서 실제 사용하게 될 금액의 계획치입니다. 현재 확정 반영액 1,882,121원에 더해 총액을 계산하지 않습니다.</li>
+            <li>이 표는 현지에서 실제 사용하게 될 금액의 계획치입니다. 현재 확정 반영액 2,303,396원에 현지 소비 예상액을 더해 총액을 계산하지 않습니다.</li>
             <li>원화 예상액은 기존 예산안에 사용한 참고값이며, 실제 카드 청구 환율·현금 환전 비용과 차이가 날 수 있습니다.</li>
           </ul>
         </div>
