@@ -175,54 +175,17 @@
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
 
-    /* Budget Master Table: comfortable stacked cards on narrow screens, unified standard table on larger screens. */
-    #tab-content-budget .budget-table-wrap { width: 100%; max-width: 100%; overflow: hidden; }
-    #tab-content-budget .budget-table { width: 100%; min-width: 0 !important; table-layout: fixed; border-collapse: collapse; }
-    #tab-content-budget .budget-table th, #tab-content-budget .budget-table td { overflow-wrap: anywhere; word-break: normal; vertical-align: top; }
-    #tab-content-budget .budget-table th:nth-child(1) { width: 14%; }
-    #tab-content-budget .budget-table th:nth-child(2) { width: 28%; }
-    #tab-content-budget .budget-table th:nth-child(3) { width: 18%; }
-    #tab-content-budget .budget-table th:nth-child(4) { width: 18%; }
-    #tab-content-budget .budget-table th:nth-child(5) { width: 22%; }
+    /* Unified PC-like Table Styles (Horizontal Scroll on Mobile) */
+    .table-wrap { width: 100%; overflow-x: auto; border-radius: 1rem; border: 1px solid #e2e8f0; background: #fff; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); }
+    .unified-table { width: 100%; min-width: 760px; border-collapse: collapse; text-align: left; font-size: 0.85rem; }
+    .unified-table th, .unified-table td { padding: 12px 16px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; white-space: nowrap; }
+    .unified-table thead th { font-weight: 800; color: #475569; background: #f8fafc; }
+    .unified-table tbody tr:last-child td { border-bottom: 0; }
+    
+    .unified-table .row-subtotal td, .unified-table .budget-subtotal td { background: #f8fafc; font-weight: 800; color: #334155; }
+    .unified-table .row-grand-total td, .unified-table .budget-total td { background: #0f172a; color: #fff !important; font-weight: 850; font-size: 0.9rem; }
+    .unified-table .row-grand-total td:nth-child(n+3), .unified-table .budget-total td:nth-child(n+3) { color: #7dd3fc !important; }
 
-    @media (max-width: 767px) {
-      #tab-content-budget .budget-table-wrap { border: 0; background: transparent; overflow: visible; }
-      #tab-content-budget .budget-table { display: block; width: 100%; min-width: 0 !important; }
-      #tab-content-budget .budget-table thead { display: none; }
-      #tab-content-budget .budget-table tbody { display: block; width: 100%; }
-      #tab-content-budget .budget-table tbody tr.cat-header { display: block; width: 100%; margin: 18px 0 6px; padding: 8px 12px; border-radius: 8px; font-weight: 800; font-size: 0.85rem; }
-      #tab-content-budget .budget-table tbody tr.cat-header td { display: block; padding: 0 !important; border: 0 !important; text-align: left !important; }
-      #tab-content-budget .budget-table tbody tr:not(.cat-header) { display: block; width: 100%; margin: 0 0 10px; padding: 4px 0; border: 1px solid #e2e8f0; border-radius: 13px; background: #fff; box-shadow: 0 4px 12px rgba(15,23,42,.035); overflow: hidden; }
-      #tab-content-budget .budget-table tbody tr:not(.cat-header) td { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; width: 100%; min-width: 0; padding: 8px 12px !important; border: 0 !important; border-bottom: 1px solid #f1f5f9 !important; text-align: right !important; line-height: 1.45; font-size: .82rem; }
-      #tab-content-budget .budget-table tbody tr:not(.cat-header) td::before { content: attr(data-label); display: block; flex: 0 0 35%; min-width: 0; text-align: left; color: #64748b; font-size: .72rem; font-weight: 800; line-height: 1.45; }
-      #tab-content-budget .budget-table tbody tr:not(.cat-header) td:last-child { border-bottom: 0 !important; }
-      #tab-content-budget .budget-table tbody td[data-label="엔화 (예상·참고)"],
-      #tab-content-budget .budget-table tbody td[data-label="원화 (확정·예상)"] { font-variant-numeric: tabular-nums; }
-      #tab-content-budget .budget-table tbody td[data-label="항목"] { font-weight: 700; }
-      #tab-content-budget .budget-table tbody tr.row-subtotal { background: #f8fafc; border-color: #cbd5e1; }
-      #tab-content-budget .budget-table tbody tr.row-subtotal td { font-weight: 700; color: #1e293b; }
-      #tab-content-budget .budget-table tbody tr.row-grand-total { background: #0f172a; border-color: #0f172a; }
-      #tab-content-budget .budget-table tbody tr.row-grand-total td { color: #fff !important; border-bottom: 1px solid rgba(255,255,255,.12) !important; font-weight: 800; font-size: 0.88rem; }
-      #tab-content-budget .budget-table tbody tr.row-grand-total td::before { color: #94a3b8; }
-      #tab-content-budget .budget-table tbody tr.row-refund { background: #f0fdf4; border-color: #bbf7d0; }
-      #tab-content-budget .budget-table tbody tr.row-refund td { color: #15803d !important; font-weight: 700; }
-      #tab-content-budget .budget-table tbody tr.row-refund td::before { color: #166534; }
-      #tab-content-budget .budget-table tbody tr.row-funding-adjustment { background: #eef2ff; border-color: #c7d2fe; }
-      #tab-content-budget .budget-table tbody tr.row-funding-adjustment td { color: #3730a3 !important; font-weight: 700; }
-      #tab-content-budget .budget-table tbody tr.row-funding-adjustment td::before { color: #4338ca; }
-    }
-
-    /* Japan-local budget forecast table */
-    #localBudgetSection { scroll-margin-top: 84px; }
-    .local-table-wrap { width:100%; max-width:100%; overflow-x:auto; border:1px solid #e2e8f0; border-radius:16px; background:#fff; box-shadow:0 5px 16px rgba(15,23,42,.04); }
-    .local-budget-table { width:100%; min-width:760px; border-collapse:collapse; text-align:left; font-size:.82rem; }
-    .local-budget-table th, .local-budget-table td { padding:11px 12px; border-bottom:1px solid #e8edf4; vertical-align:top; overflow-wrap:anywhere; }
-    .local-budget-table thead th { background:#f1f5f9; color:#334155; font-size:.73rem; font-weight:850; white-space:nowrap; }
-    .local-budget-table tbody tr:last-child td { border-bottom:0; }
-    .local-budget-table .budget-group-row td { padding:9px 12px; font-weight:850; }
-    .local-budget-table .budget-subtotal td { background:#f8fafc; font-weight:800; color:#334155; }
-    .local-budget-table .budget-total td { background:#0f172a; color:#fff; font-weight:850; font-size:.88rem; }
-    .local-budget-table .budget-total td:nth-child(n+3) { color:#7dd3fc; }
     .estimate-chip { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:.67rem; font-weight:850; white-space:nowrap; }
     .estimate-chip.essential { background:#dcfce7; color:#166534; }
     .estimate-chip.optional { background:#ede9fe; color:#5b21b6; }
@@ -230,29 +193,6 @@
     .local-budget-metric strong { display:block; margin-top:4px; font-size:1.23rem; font-weight:900; letter-spacing:-.025em; font-variant-numeric:tabular-nums; }
     .budget-help { color:#475569; font-size:.76rem; line-height:1.65; }
     .budget-help li { margin-top:3px; }
-    @media (max-width:767px) {
-      /* Match the confirmed-cost table: stack each forecast row as a labeled card. */
-      .local-table-wrap { border:0; border-radius:0; background:transparent; box-shadow:none; overflow:visible; }
-      .local-budget-table { display:block; width:100%; min-width:0; font-size:.78rem; table-layout:fixed; }
-      .local-budget-table thead { display:none; }
-      .local-budget-table tbody { display:block; width:100%; }
-      .local-budget-table tbody tr.budget-group-row { display:block; width:100%; margin:18px 0 6px; padding:8px 12px; border:0; border-radius:8px; font-weight:800; font-size:.84rem; }
-      .local-budget-table tbody tr.budget-group-row td { display:block; padding:0 !important; border:0 !important; text-align:left !important; }
-      .local-budget-table tbody tr:not(.budget-group-row) { display:block; width:100%; margin:0 0 10px; padding:4px 0; border:1px solid #e2e8f0; border-radius:13px; background:#fff; box-shadow:0 4px 12px rgba(15,23,42,.035); overflow:hidden; }
-      .local-budget-table tbody tr:not(.budget-group-row) td { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; width:100%; min-width:0; padding:8px 12px !important; border:0 !important; border-bottom:1px solid #f1f5f9 !important; text-align:right !important; line-height:1.45; font-size:.82rem; }
-      .local-budget-table tbody tr:not(.budget-group-row) td::before { content:attr(data-label); display:block; flex:0 0 35%; min-width:0; text-align:left; color:#64748b; font-size:.72rem; font-weight:800; line-height:1.45; }
-      .local-budget-table tbody tr:not(.budget-group-row) td:last-child { border-bottom:0 !important; }
-      .local-budget-table tbody tr:not(.budget-group-row) td:nth-child(3),
-      .local-budget-table tbody tr:not(.budget-group-row) td:nth-child(4) { font-variant-numeric:tabular-nums; }
-      .local-budget-table tbody tr:not(.budget-group-row) td:first-child { font-weight:700; }
-      .local-budget-table tbody tr.budget-subtotal { background:#f8fafc; border-color:#cbd5e1; }
-      .local-budget-table tbody tr.budget-subtotal td { font-weight:700; color:#1e293b; }
-      .local-budget-table tbody tr.budget-total { background:#0f172a; border-color:#0f172a; }
-      .local-budget-table tbody tr.budget-total td { color:#fff !important; border-bottom:1px solid rgba(255,255,255,.12) !important; font-weight:800; font-size:.86rem; }
-      .local-budget-table tbody tr.budget-total td::before { color:#94a3b8; }
-      .local-budget-table tbody tr.budget-total td:nth-child(n+2) { color:#7dd3fc !important; }
-      .local-budget-metric strong { font-size:1.08rem; }
-    }
 
   </style>
 </head>
@@ -334,20 +274,10 @@
     <!-- ========================================== -->
     <section id="tab-content-itinerary" class="tab-pane space-y-6">
       
-      <!-- Day Quick Filter Tabs -->
-      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
-        <div class="flex items-center gap-2">
-          <span class="text-xl">📅</span>
-          <h3 class="text-lg font-bold text-slate-900">일차별 세부 타임라인</h3>
-        </div>
-        <div class="flex items-center gap-1 overflow-x-auto no-scrollbar py-1" id="dayFilterGroup">
-          <button onclick="filterDayCards('all', this)" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-slate-800 text-white">전체</button>
-          <button onclick="filterDayCards('1', this)" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">1일차</button>
-          <button onclick="filterDayCards('2', this)" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">2일차</button>
-          <button onclick="filterDayCards('3', this)" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">3일차</button>
-          <button onclick="filterDayCards('4', this)" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">4일차</button>
-          <button onclick="filterDayCards('5', this)" class="day-btn px-2.5 py-1 text-xs font-semibold rounded-md bg-white border border-slate-300 text-slate-600 hover:bg-slate-50">5일차</button>
-        </div>
+      <!-- Itinerary Header -->
+      <div class="flex items-center border-b border-slate-200 pb-3 gap-2">
+        <span class="text-xl">📅</span>
+        <h3 class="text-lg font-bold text-slate-900">일차별 세부 타임라인</h3>
       </div>
 
       <!-- Day 1 Card -->
@@ -919,26 +849,26 @@
             <p class="text-[11px] text-sky-700 mt-0.5">트래블카드 총 100,000엔 (1차·2차 완료)</p>
           </div>
           <div class="glass-card p-4 rounded-xl border border-slate-300 bg-slate-50">
-            <p class="text-xs font-bold text-slate-700">3. 현재 예산 반영 합계</p>
-            <p class="text-xl font-black text-slate-900 mt-1">2,303,396원</p>
-            <p class="text-[11px] text-slate-600 mt-0.5">충전 완료 100,000엔 합산 · 현지 소비액 중복 합산 없음</p>
-          </div>
+          <p class="text-xs font-bold text-slate-700">3. 현재 예산 반영 합계</p>
+          <p class="text-xl font-black text-slate-900 mt-1">2,303,396원</p>
+          <p class="text-[11px] text-slate-600 mt-0.5">충전 완료 100,000엔 합산 · 현지 소비 예상액은 별도 합산하지 않음</p>
         </div>
+      </div>
 
-        <div class="budget-table-wrap rounded-2xl border border-slate-200 bg-white shadow-sm">
-          <table class="budget-table text-left text-xs sm:text-sm" aria-label="현재 확정 지출 및 충전 내역">
-            <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
-              <tr>
-                <th class="py-3 px-3">구분</th>
-                <th class="py-3 px-3">항목</th>
-                <th class="py-3 px-3 text-right">확정 반영액 (원화)</th>
-                <th class="py-3 px-3">상태</th>
-                <th class="py-3 px-3">집계 기준</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100 text-slate-600">
-              <tr class="cat-header bg-sky-100/70 font-extrabold text-sky-900 border-t-2 border-sky-300">
-                <td colspan="5" class="py-2.5 px-3">📂 1. 기결제 완료된 여행 비용</td>
+      <div class="table-wrap">
+        <table class="unified-table text-xs sm:text-sm" aria-label="현재 확정 지출 및 충전 내역">
+          <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+            <tr>
+              <th class="py-3 px-4 w-[12%]">구분</th>
+              <th class="py-3 px-4 w-[32%]">항목</th>
+              <th class="py-3 px-4 w-[18%] text-right">확정 반영액 (원화)</th>
+              <th class="py-3 px-4 w-[16%]">상태</th>
+              <th class="py-3 px-4 w-[22%]">집계 기준</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-600">
+            <tr class="cat-header bg-sky-100/70 font-extrabold text-sky-900 border-t-2 border-sky-300">
+              <td colspan="5" class="py-2.5 px-3">📂 1. 기결제 완료된 여행 비용</td>
               </tr>
               <tr>
                 <td data-label="구분" class="py-2.5 px-3 font-semibold text-slate-800">항공 관련</td>
@@ -1047,26 +977,26 @@
               <p class="text-[11px] text-violet-700 mt-1">약 608,500원 · 셀린느(4.4만) + 잡화(2.8만)</p>
             </div>
             <div class="glass-card p-4 rounded-xl border border-sky-300 bg-sky-50/70 local-budget-metric">
-              <p class="text-xs font-bold text-sky-800">최종 권장 환전액</p>
-              <strong class="text-sky-950">150,000엔</strong>
-              <p class="text-[11px] text-sky-700 mt-1">10만엔 충전 완료 · 5만엔 추가 권장 (ATM 3만엔 출금)</p>
-            </div>
+            <p class="text-xs font-bold text-sky-800">현지 지출 예상 총액</p>
+            <strong class="text-sky-950">213,022~240,829엔</strong>
+            <p class="text-[11px] text-sky-700 mt-1">약 1,800,300~2,035,300원 · 선택 쇼핑 포함</p>
           </div>
+        </div>
 
-          <div class="local-table-wrap">
-            <table aria-label="일본 현지 사용 예상 예산안" class="local-budget-table">
-              <thead>
-                <tr>
-                  <th>구분</th>
-                  <th>예상 사용 항목 / 일정 참고</th>
-                  <th class="text-right">예상 엔화</th>
-                  <th class="text-right">원화 환산 참고</th>
-                  <th>예산 성격</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="budget-group-row bg-emerald-50 text-emerald-900"><td colspan="5">💴 현지 필수 경비 · 여행 일정상 필요한 비용</td></tr>
-                <tr data-budget-key="lodging">
+        <div class="table-wrap">
+          <table aria-label="일본 현지 사용 예상 예산안" class="unified-table text-xs sm:text-sm">
+            <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+              <tr>
+                <th class="py-3 px-4 w-[12%]">구분</th>
+                <th class="py-3 px-4 w-[32%]">예상 사용 항목 / 일정 참고</th>
+                <th class="py-3 px-4 w-[18%] text-right">예상 엔화</th>
+                <th class="py-3 px-4 w-[16%] text-right">원화 환산 참고</th>
+                <th class="py-3 px-4 w-[22%]">예산 성격</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-600">
+              <tr class="budget-group-row bg-emerald-50 text-emerald-900"><td colspan="5">💴 현지 필수 경비 · 여행 일정상 필요한 비용</td></tr>
+              <tr data-budget-key="lodging">
                   <td class="font-semibold text-slate-800" data-label="구분">현지 세금</td>
                   <td data-label="예상 사용 항목 / 일정 참고"><strong class="text-slate-900">삿포로시 숙박세 (2인·4박)</strong><div class="text-[11px] text-slate-500 mt-1">Day 1 · 호텔 체크인 시 지불, 호텔에 실제 금액 확인</div></td>
                   <td class="text-right font-bold" data-label="예상 엔화">2,400엔</td>
@@ -1195,8 +1125,8 @@
           </div>
 
           <!-- Empty Ledger Table Ready for Entry -->
-          <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
-            <table class="w-full text-left text-xs sm:text-sm whitespace-nowrap min-w-[620px]">
+          <div class="table-wrap">
+            <table class="unified-table text-xs sm:text-sm" aria-label="실제 지출 기록장부">
               <thead class="bg-slate-100/90 text-slate-700 font-bold border-b border-slate-200">
                 <tr>
                   <th class="py-3 px-4 w-[12%]">일자</th>
@@ -1350,44 +1280,6 @@
       });
       window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     }
-
-    // Accordion Toggle for Budget Tab
-    function toggleSection(id) {
-      const content = document.getElementById('section-' + id);
-      const icon = document.getElementById('icon-' + id);
-      content.classList.toggle('hidden');
-      if (content.classList.contains('hidden')) {
-        icon.classList.remove('rotate-180');
-      } else {
-        icon.classList.add('rotate-180');
-      }
-    }
-
-    // Day Cards Filter
-    function filterDayCards(day, clickedButton) {
-      const cards = document.querySelectorAll('.day-card');
-      const buttons = document.querySelectorAll('#dayFilterGroup .day-btn');
-
-      buttons.forEach(btn => {
-        btn.classList.remove('bg-slate-800', 'text-white');
-        btn.classList.add('bg-white', 'text-slate-600');
-      });
-
-      if (clickedButton) {
-        clickedButton.classList.add('bg-slate-800', 'text-white');
-        clickedButton.classList.remove('bg-white', 'text-slate-600');
-      }
-
-      cards.forEach(card => {
-        if (day === 'all' || card.getAttribute('data-day') === day) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-
-
 
     // Payment Filter in Tab 2
     function filterPayment(type, clickedButton) {
