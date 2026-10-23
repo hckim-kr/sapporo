@@ -274,10 +274,12 @@
     <!-- ========================================== -->
     <section id="tab-content-itinerary" class="tab-pane space-y-6">
       
-      <!-- Itinerary Header -->
-      <div class="flex items-center border-b border-slate-200 pb-3 gap-2">
-        <span class="text-xl">📅</span>
-        <h3 class="text-lg font-bold text-slate-900">일차별 세부 타임라인</h3>
+      <!-- Day Quick Filter Tabs -->
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">📅</span>
+          <h3 class="text-lg font-bold text-slate-900">일차별 세부 타임라인</h3>
+        </div>
       </div>
 
       <!-- Day 1 Card -->
@@ -296,56 +298,53 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
           <!-- Morning -->
           <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
-            <div class="space-y-2">
-              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오전 (10:20 ~)</span>
-              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
-                <li>• <strong>10:20 신치토세 공항 도착</strong> 및 입국 수속</li>
-                <li>• 세븐뱅크 ATM에서 트래블카드로 <strong>30,000엔 출금 예정</strong>. 출발 전 충전 목표 15만엔에 포함된 금액이므로 별도 예산으로 중복 계산하지 않기</li>
-                <li>• 이코카·파스모 각 5,000엔 충전은 실제 교통비 계획에 맞춰 조정</li>
+            <div class="space-y-3">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오전 (입국 및 점심)</span>
+              <ul class="text-xs text-slate-600 space-y-2.5">
+                <li class="flex gap-2 items-start"><span class="font-bold text-sky-700 w-10 shrink-0 text-right mt-[1px]">10:20</span><span class="leading-relaxed"><strong>신치토세 공항 도착</strong> 및 입국 심사</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-sky-700 w-10 shrink-0 text-right mt-[1px]">11:00</span><span class="leading-relaxed">세븐뱅크 ATM 출금(3만엔) 및 IC카드 충전</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-sky-700 w-10 shrink-0 text-right mt-[1px]">11:30</span><span class="leading-relaxed">공항 3층 <strong>스프카레 라비</strong> 점심 식사</span></li>
               </ul>
             </div>
-            <div class="mt-3 pt-2.5 border-t border-slate-200">
+            <div class="mt-4 pt-3 border-t border-slate-200">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-slate-800">🍛 [중식] 스프카레 라비</span>
                 <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드결제</span>
               </div>
-              <p class="text-[11px] text-slate-500 mt-0.5">입국 수속·ATM·교통카드 충전 후 공항에서 식사. 대기 상황에 따라 메뉴/시간 조정</p>
             </div>
           </div>
 
           <!-- Afternoon -->
           <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
-            <div class="space-y-2">
-              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오후 (13:30 ~ 17:30 · 유동 일정)</span>
-              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
-                <li>• 점심 후 JR 이동 → 숙소에는 우선 짐 보관 (도착 시각은 입국·식사 대기에 따라 변동)</li>
-                <li>• 체크인 가능 시각 확인 후 체크인, 숙박세 2,400엔은 호텔에 금액 재확인 후 현금 지불</li>
-                <li>• 14:30 이후 여유가 되면 <strong>휴먼메이드 & 스투시</strong> 방문 (첫날 쇼핑은 선택 일정)</li>
-                <li>• 시간이 남으면 사츠도라(간이 아이젠) 및 모유크 삿포로 방문</li>
+            <div class="space-y-3">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오후 (시내 이동 및 쇼핑)</span>
+              <ul class="text-xs text-slate-600 space-y-2.5">
+                <li class="flex gap-2 items-start"><span class="font-bold text-sky-700 w-10 shrink-0 text-right mt-[1px]">13:30</span><span class="leading-relaxed">JR 열차로 삿포로 이동 및 호텔 짐 보관</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-sky-700 w-10 shrink-0 text-right mt-[1px]">14:30</span><span class="leading-relaxed">다누키코지 <strong>스투시, 휴먼메이드</strong> 쇼핑</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-sky-700 w-10 shrink-0 text-right mt-[1px]">16:30</span><span class="leading-relaxed">사츠도라(아이젠 구매) 및 <strong>키노토야</strong> 타르트</span></li>
               </ul>
             </div>
-            <div class="mt-3 pt-2.5 border-t border-slate-200">
+            <div class="mt-4 pt-3 border-t border-slate-200">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-slate-800">🥧 [간식] 키노토야 베이크</span>
                 <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드결제</span>
               </div>
-              <p class="text-[11px] text-slate-500 mt-0.5">지하상가 폴타운 갓 구운 치즈타르트</p>
             </div>
           </div>
 
           <!-- Evening & Night -->
           <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
-            <div class="space-y-2">
-              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">저녁 & 심야 야식 (시간 유동)</span>
-              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
-                <li>• 입국 수속·숙소 이동·쇼핑 진행 상황에 맞춰 저녁 시간을 유동적으로 운영</li>
-                <li>• <strong>야끼니꾸 츠바메</strong>에서 저녁 식사 (영업 시작 시각과 예약 필요 여부는 방문 전 확인)</li>
-                <li>• 식후 오도리 공원 & 삿포로 TV타워 설경 야경 산책. 라멘신겐은 체력과 대기 상황에 따라 선택</li>
+            <div class="space-y-3">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">저녁 & 심야 야식</span>
+              <ul class="text-xs text-slate-600 space-y-2.5">
+                <li class="flex gap-2 items-start"><span class="font-bold text-sky-700 w-10 shrink-0 text-right mt-[1px]">18:00</span><span class="leading-relaxed"><strong>야끼니꾸 츠바메</strong> 와규 저녁 식사</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-sky-700 w-10 shrink-0 text-right mt-[1px]">19:30</span><span class="leading-relaxed">오도리 공원 & 삿포로 TV타워 눈길 산책</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-sky-700 w-10 shrink-0 text-right mt-[1px]">21:30</span><span class="leading-relaxed">스스키노 거리 구경 및 <strong>라멘신겐</strong> 야식</span></li>
               </ul>
             </div>
-            <div class="mt-3 pt-2.5 border-t border-slate-200 space-y-1.5">
+            <div class="mt-4 pt-3 border-t border-slate-200 space-y-2">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-slate-800">🥩 [석식] 야끼니꾸 츠바메 (燕) 남5조 스스키노점</span>
+                <span class="text-xs font-bold text-slate-800">🥩 [석식] 야끼니꾸 츠바메 (남5조)</span>
                 <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드결제</span>
               </div>
               <div class="flex items-center justify-between">
@@ -373,62 +372,58 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
           <!-- Morning -->
           <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
-            <div class="space-y-2">
-              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오전 (조식 후 10:00 오픈 목표)</span>
-              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
-                <li>• 호텔 조식은 가능하면 08:00 전후로 앞당겨 09:00 전후 마무리</li>
-                <li>• 이동 시간을 고려해 삿포로역 도착 후 <strong>10:00 다이마루 백화점 오픈</strong> 맞추기 (조식 지연 시 쇼핑 시작 조정)</li>
-                <li>• [B1F] <strong>生노스망</strong> 앙크림 파이 픽업</li>
-                <li>• [스텔라 6F] <strong>네무로 하나마루</strong> 번호표 수령 가능 여부·대기 방식 확인</li>
+            <div class="space-y-3">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오전 (다이마루 오픈런)</span>
+              <ul class="text-xs text-slate-600 space-y-2.5">
+                <li class="flex gap-2 items-start"><span class="font-bold text-emerald-700 w-10 shrink-0 text-right mt-[1px]">08:00</span><span class="leading-relaxed">호텔 조식 후 삿포로역으로 이동</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-emerald-700 w-10 shrink-0 text-right mt-[1px]">10:00</span><span class="leading-relaxed">다이마루 오픈 (<strong>B1F 센슈안 생노스망</strong>, 셀린느 지갑)</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-emerald-700 w-10 shrink-0 text-right mt-[1px]">10:15</span><span class="leading-relaxed">스텔라 6F <strong>네무로 하나마루</strong> 번호표 발권</span></li>
               </ul>
             </div>
-            <div class="mt-3 pt-2.5 border-t border-slate-200">
+            <div class="mt-4 pt-3 border-t border-slate-200">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-slate-800">👜 [쇼핑] 셀린느(Celine) 지갑</span>
                 <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드결제</span>
               </div>
-              <p class="text-[11px] text-slate-500 mt-0.5">면세/환급 가능 여부와 필요 영수증·절차를 매장에서 확인</p>
             </div>
           </div>
 
           <!-- Afternoon -->
           <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
-            <div class="space-y-2">
-              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오후 (11:30 ~ 16:00)</span>
-              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
-                <li>• 회전초밥 <strong>네무로 하나마루</strong> 점심 식사</li>
-                <li>• <strong>치카호(지하보행로)</strong> 따라 따뜻하게 남쪽 이동</li>
-                <li>• 홋카이도청 구 본청사 설경 & <strong>몽벨 아카렌가점</strong> 구경</li>
-                <li>• <strong>Roquefort Cafe</strong>에서 커피 & 치즈케이크 휴식</li>
+            <div class="space-y-3">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오후 (점심 및 카페 휴식)</span>
+              <ul class="text-xs text-slate-600 space-y-2.5">
+                <li class="flex gap-2 items-start"><span class="font-bold text-emerald-700 w-10 shrink-0 text-right mt-[1px]">11:30</span><span class="leading-relaxed"><strong>네무로 하나마루</strong> 점심 식사 (대기 번호에 맞춰)</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-emerald-700 w-10 shrink-0 text-right mt-[1px]">13:00</span><span class="leading-relaxed">치카호(지하보행로) 이동 & <strong>아카렌가 몽벨</strong> 구경</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-emerald-700 w-10 shrink-0 text-right mt-[1px]">15:00</span><span class="leading-relaxed"><strong>Roquefort Cafe</strong> 핸드드립 커피 휴식</span></li>
               </ul>
             </div>
-            <div class="mt-3 pt-2.5 border-t border-slate-200">
+            <div class="mt-4 pt-3 border-t border-slate-200">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-slate-800">☕ [카페] Roquefort Cafe</span>
                 <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드결제</span>
               </div>
-              <p class="text-[11px] text-slate-500 mt-0.5">분위기 좋은 핸드드립 로스터리 명소</p>
             </div>
           </div>
 
           <!-- Evening -->
           <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
-            <div class="space-y-2">
-              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">저녁 & 밤 (16:30 ~)</span>
-              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
-                <li>• 16:30 전후 <strong>모이와산 로프웨이</strong> 탑승, 겨울 운행 상황과 마지막 탑승 시각은 당일 확인</li>
-                <li>• 정상에서 삿포로 시내 야경과 설경 감상</li>
-                <li>• 18:30~19:00 전후 스스키노 복귀 후 <strong>스아게+ 본점</strong>에서 저녁. 혼잡으로 대기할 수 있으니 너무 늦어지지 않도록 운영</li>
+            <div class="space-y-3">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">저녁 & 밤 (짐 보관 및 야경)</span>
+              <ul class="text-xs text-slate-600 space-y-2.5">
+                <li class="flex gap-2 items-start"><span class="font-bold text-emerald-700 w-10 shrink-0 text-right mt-[1px]">16:00</span><span class="leading-relaxed">숙소 잠시 들러 <strong>쇼핑 짐 보관 및 외출 재정비</strong></span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-emerald-700 w-10 shrink-0 text-right mt-[1px]">17:00</span><span class="leading-relaxed"><strong>모이와산 로프웨이</strong> 탑승 (야경 감상)</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-emerald-700 w-10 shrink-0 text-right mt-[1px]">19:00</span><span class="leading-relaxed">스스키노 복귀 후 <strong>스아게+ 본점</strong> 저녁 식사</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-emerald-700 w-10 shrink-0 text-right mt-[1px]">20:30</span><span class="leading-relaxed"><strong>파르페 사토</strong> 시메파르페 디저트</span></li>
               </ul>
             </div>
-            <div class="mt-3 pt-2.5 border-t border-slate-200 space-y-1.5">
+            <div class="mt-4 pt-3 border-t border-slate-200 space-y-2">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-slate-800">🍛 [석식] 스아게 플러스 (Suage+) 본점</span>
+                <span class="text-xs font-bold text-slate-800">🍛 [석식] 스아게 플러스 본점</span>
                 <span class="pill-cash px-2 py-0.5 rounded text-[10px] font-bold">현금결제</span>
               </div>
-              <p class="text-[11px] text-slate-500">수요일 기준 공식 안내: 21:00 종료·20:30 라스트오더, 사전 예약 불가. 대기 상황을 고려해 복귀 후 바로 방문</p>
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-slate-800">🍨 [선택 디저트] 파르페, 커피, 술, 사토</span>
+                <span class="text-xs font-bold text-slate-800">🍨 [디저트] 파르페 사토</span>
                 <span class="pill-cash px-2 py-0.5 rounded text-[10px] font-bold">현금결제</span>
               </div>
             </div>
@@ -442,7 +437,7 @@
           <div class="flex items-center gap-3">
             <span class="px-2.5 py-1 bg-amber-100 text-amber-800 text-xs font-extrabold rounded-md">Day 3</span>
             <span class="text-sm font-semibold text-slate-500">2027.01.28 (목)</span>
-            <h4 class="text-base font-bold text-slate-900">비에이 & 후라노 버스투어 & 생양고기 징기스칸</h4>
+            <h4 class="text-base font-bold text-slate-900">비에이 & 후라노 버스투어 & 징기스칸 본즈</h4>
           </div>
           <span class="text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-md">
             설경 투어 • 복귀 후 생양고기 징기스칸
@@ -452,59 +447,55 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
           <!-- Morning -->
           <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
-            <div class="space-y-2">
-              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오전 (09:30 출발)</span>
-              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
-                <li>• 조식 후 출발 준비. 투어 집결 시각·장소와 조식 운영 시간을 전날 재확인</li>
-                <li>• 09:30 삿포로역 집결은 현재 계획값. <strong>예약한 투어의 실제 집결·출발 시각을 최우선</strong>으로 적용</li>
-                <li>• 세븐스타 나무 & 패치워크 로드 눈꽃 드라이브</li>
+            <div class="space-y-3">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오전 (비에이 투어 출발)</span>
+              <ul class="text-xs text-slate-600 space-y-2.5">
+                <li class="flex gap-2 items-start"><span class="font-bold text-amber-700 w-10 shrink-0 text-right mt-[1px]">09:30</span><span class="leading-relaxed">삿포로역 집결 및 비에이 투어 버스 출발</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-amber-700 w-10 shrink-0 text-right mt-[1px]">11:30</span><span class="leading-relaxed">세븐스타 나무 & 패치워크 로드 눈꽃 드라이브</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-amber-700 w-10 shrink-0 text-right mt-[1px]">12:30</span><span class="leading-relaxed"><strong>비에이 준페이</strong> 점심 식사 (에비동)</span></li>
               </ul>
             </div>
-            <div class="mt-3 pt-2.5 border-t border-slate-200">
+            <div class="mt-4 pt-3 border-t border-slate-200">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-slate-800">🍤 [중식] 비에이 준페이 (Junpei)</span>
+                <span class="text-xs font-bold text-slate-800">🍤 [중식] 비에이 준페이</span>
                 <span class="pill-cash px-2 py-0.5 rounded text-[10px] font-bold">현금결제</span>
               </div>
-              <p class="text-[11px] text-slate-500 mt-0.5">투어 요금에 식사가 포함되는지 사전 확인. 미포함이면 현지 식비·현금 예산에 반영</p>
             </div>
           </div>
 
           <!-- Afternoon -->
           <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
-            <div class="space-y-2">
-              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오후 설경 명소</span>
-              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
-                <li>• <strong>크리스마스트리</strong> 단독 눈밭 포토존</li>
-                <li>• <strong>탁신관 자작나무 숲길</strong> 고요한 산책</li>
-                <li>• 푸른 물빛이 신비로운 <strong>흰수염폭포</strong> 관람</li>
-                <li>• 후라노 <strong>닝구르테라스</strong> 통나무 요정마을 야경</li>
+            <div class="space-y-3">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오후 (설경 명소 순례)</span>
+              <ul class="text-xs text-slate-600 space-y-2.5">
+                <li class="flex gap-2 items-start"><span class="font-bold text-amber-700 w-10 shrink-0 text-right mt-[1px]">14:00</span><span class="leading-relaxed"><strong>크리스마스트리</strong> 및 탁신관 자작나무 숲길</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-amber-700 w-10 shrink-0 text-right mt-[1px]">15:30</span><span class="leading-relaxed">푸른 물빛 <strong>흰수염폭포</strong> 관람</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-amber-700 w-10 shrink-0 text-right mt-[1px]">17:00</span><span class="leading-relaxed"><strong>닝구르테라스</strong> 통나무 요정마을 야경</span></li>
               </ul>
             </div>
-            <div class="mt-3 pt-2.5 border-t border-slate-200">
+            <div class="mt-4 pt-3 border-t border-slate-200">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-slate-800">🥛 [간식] 츄츄의 집 야키밀크</span>
                 <span class="pill-cash px-2 py-0.5 rounded text-[10px] font-bold">현금결제</span>
               </div>
-              <p class="text-[11px] text-slate-500 mt-0.5">눈 내리는 숲속 오두막에서 마시는 따뜻한 구운 우유</p>
             </div>
           </div>
 
           <!-- Evening -->
           <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
-            <div class="space-y-2">
-              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">저녁 삿포로 복귀 (20:30~21:00 예상)</span>
-              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
-                <li>• 버스에서 휴식하며 삿포로 스스키노로 복귀 (도로·기상 상황에 따라 변동 가능)</li>
-                <li>• <strong>아라타나루 본즈 스스키노 본점</strong>은 21:15~21:30대 예약 가능 여부를 사전에 확인</li>
-                <li>• 투어 복귀가 지연되면 식당에 전화로 연락하고, 숙소 복귀 후 도보 이동</li>
+            <div class="space-y-3">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">저녁 (삿포로 복귀)</span>
+              <ul class="text-xs text-slate-600 space-y-2.5">
+                <li class="flex gap-2 items-start"><span class="font-bold text-amber-700 w-10 shrink-0 text-right mt-[1px]">20:30</span><span class="leading-relaxed">버스 휴식 후 삿포로 스스키노 복귀</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-amber-700 w-10 shrink-0 text-right mt-[1px]">21:15</span><span class="leading-relaxed"><strong>아라타나루 본즈</strong> 생양고기 징기스칸 (예약)</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-amber-700 w-10 shrink-0 text-right mt-[1px]">22:30</span><span class="leading-relaxed">호텔 대욕장 온천 후 휴식</span></li>
               </ul>
             </div>
-            <div class="mt-3 pt-2.5 border-t border-slate-200">
+            <div class="mt-4 pt-3 border-t border-slate-200">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-slate-800">🥩 [석식] 아라타나루 본즈 스스키노 본점 (생양고기 징기스칸)</span>
+                <span class="text-xs font-bold text-slate-800">🥩 [석식] 아라타나루 본즈</span>
                 <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드결제</span>
               </div>
-              <p class="text-[11px] text-slate-500 mt-0.5">현재 공식 안내상 자정까지 영업·음식 라스트오더 23:30. 예약 시간을 확정하고, 버스 지연 시 매장에 직접 연락</p>
             </div>
           </div>
         </div>
@@ -519,68 +510,62 @@
             <h4 class="text-base font-bold text-slate-900">오타루 펭귄 산책 & 역 근처 미식 코스</h4>
           </div>
           <span class="text-xs font-semibold text-violet-700 bg-violet-50 border border-violet-200 px-2.5 py-1 rounded-md">
-            수족관 2타임 관람 • 나루토·야부한 우선
+            수족관 2타임 관람 • 오타루 야경
           </span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
           <!-- Morning Aquarium -->
           <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
-            <div class="space-y-2">
-              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오전 (09:00 ~ 13:30)</span>
-              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
-                <li>• JR 열차로 <strong>'오타루역'</strong> 하차 (※미나미오타루 아님)</li>
-                <li>• 3번 홈 버스 탑승 → 오타루 수족관 이동</li>
-                <li>• 🐧 <strong>11:30 [1차] 펭귄의 눈 속 산책</strong> 관람</li>
-                <li>• 🐧 <strong>12:40 [2차] 펭귄의 눈 속 산책</strong> 추가 관람</li>
+            <div class="space-y-3">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오전 (오타루 수족관)</span>
+              <ul class="text-xs text-slate-600 space-y-2.5">
+                <li class="flex gap-2 items-start"><span class="font-bold text-violet-700 w-10 shrink-0 text-right mt-[1px]">09:00</span><span class="leading-relaxed">JR 열차로 <strong>오타루역</strong> 하차 (미나미오타루 아님)</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-violet-700 w-10 shrink-0 text-right mt-[1px]">10:00</span><span class="leading-relaxed">역 앞 3번 홈 버스 탑승 → <strong>수족관 이동</strong></span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-violet-700 w-10 shrink-0 text-right mt-[1px]">11:30</span><span class="leading-relaxed">🐧 <strong>1차 펭귄의 눈 속 산책</strong> 관람</span></li>
               </ul>
             </div>
-            <div class="mt-3 pt-2.5 border-t border-slate-200">
+            <div class="mt-4 pt-3 border-t border-slate-200">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-slate-800">🎟️ [입장료] 오타루 수족관</span>
                 <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드결제</span>
               </div>
-              <p class="text-[11px] text-slate-500 mt-0.5">2인 약 2,600엔 (버스비는 IC카드 태그)</p>
             </div>
           </div>
 
           <!-- Afternoon Otaru Walk -->
           <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
-            <div class="space-y-2">
-              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오후 (13:30 ~ 17:30)</span>
-              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
-                <li>• 수족관에서 오타루역으로 복귀 후 역 근처에서 점심</li>
-                <li>• <strong>1순위 후보: 나루토 본점</strong> (若鶏時代なると) — 명물 반마리 치킨</li>
-                <li>• <strong>1순위 후보: 야부한 소바</strong> (小樽蕎麦屋 籔半) — 오타루역 도보권</li>
-                <li>• 두 곳의 대기 상황에 따라 선택. 야부한은 소바 소진 시 조기 접수 종료 가능</li>
-                <li>• 식사 후 오르골당 본관·사카이마치 상점가, 르타오·키타카로·카마에이 디저트 로드</li>
+            <div class="space-y-3">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오후 (부타동 및 디저트 거리)</span>
+              <ul class="text-xs text-slate-600 space-y-2.5">
+                <li class="flex gap-2 items-start"><span class="font-bold text-violet-700 w-10 shrink-0 text-right mt-[1px]">12:40</span><span class="leading-relaxed">🐧 <strong>2차 펭귄 산책</strong> 추가 관람 후 시내 복귀</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-violet-700 w-10 shrink-0 text-right mt-[1px]">14:00</span><span class="leading-relaxed"><strong>로쿠미안</strong> 숯불 부타동 늦은 점심 (14:30 마감)</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-violet-700 w-10 shrink-0 text-right mt-[1px]">15:00</span><span class="leading-relaxed">사카이마치 디저트 구경 (르타오, 카마에이 등)</span></li>
               </ul>
             </div>
-            <div class="mt-3 pt-2.5 border-t border-slate-200">
+            <div class="mt-4 pt-3 border-t border-slate-200">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-slate-800">🍗 [중식 1순위] 나루토 본점 / 야부한 소바</span>
-                <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드결제</span>
+                <span class="text-xs font-bold text-slate-800">🍖 [중식] 로쿠미안 (六味庵)</span>
+                <span class="pill-cash px-2 py-0.5 rounded text-[10px] font-bold">현금결제</span>
               </div>
-              <p class="text-[11px] text-slate-500 mt-0.5">로쿠미안은 품절·영업 상황에 대비한 플랜 B로 변경</p>
             </div>
           </div>
 
           <!-- Evening -->
           <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 flex flex-col justify-between">
-            <div class="space-y-2">
-              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">저녁 & 쇼핑 (18:00 ~)</span>
-              <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
-                <li>• <strong>오타루 운하</strong> 가스등 켜진 야경 산책 후 JR 복귀</li>
-                <li>• 스스키노 <strong>'원조 라멘요코초'</strong> 골목 탐방</li>
-                <li>• 호텔 앞 <strong>메가 돈키호테</strong> 귀국 전 면세 쇼핑 및 짐 패킹</li>
+            <div class="space-y-3">
+              <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">저녁 & 쇼핑 (삿포로 복귀)</span>
+              <ul class="text-xs text-slate-600 space-y-2.5">
+                <li class="flex gap-2 items-start"><span class="font-bold text-violet-700 w-10 shrink-0 text-right mt-[1px]">17:30</span><span class="leading-relaxed"><strong>오타루 운하</strong> 가스등 야경 산책 후 JR 탑승</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-violet-700 w-10 shrink-0 text-right mt-[1px]">18:30</span><span class="leading-relaxed">스스키노 복귀 후 돈키호테 면세 쇼핑</span></li>
+                <li class="flex gap-2 items-start"><span class="font-bold text-violet-700 w-10 shrink-0 text-right mt-[1px]">19:30</span><span class="leading-relaxed">원조 라멘요코초 <strong>테시카가 라멘</strong> 저녁 식사</span></li>
               </ul>
             </div>
-            <div class="mt-3 pt-2.5 border-t border-slate-200">
+            <div class="mt-4 pt-3 border-t border-slate-200">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-slate-800">🍜 [석식] 테시카가 라멘</span>
                 <span class="pill-card px-2 py-0.5 rounded text-[10px] font-bold">카드결제</span>
               </div>
-              <p class="text-[11px] text-slate-500 mt-0.5">라멘요코초 내 옥수수 콘버터 미소라멘 명가</p>
             </div>
           </div>
         </div>
@@ -600,20 +585,20 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 space-y-2">
-            <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오전 삿포로 체크아웃</span>
-            <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
-              <li>• 07:00 호텔 조식 뷔페 (마지막 셀프 카이센동 식사)</li>
-              <li>• 08:30 체크아웃 후 삿포로역 이동 (귀국편 출발 시각 확정 후 조식·체크아웃 시간을 역산)</li>
-              <li>• 08:45 JR 쾌속 에어포트 탑승 → 09:30~09:40 신치토세 공항 도착은 현재 가안. <strong>귀국편이 12:00 전후라면</strong> 면세 세관 확인·수하물 수속 여유가 빠듯할 수 있어 더 이른 열차를 검토</li>
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 space-y-3">
+            <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">오전 (삿포로 체크아웃)</span>
+            <ul class="text-xs text-slate-600 space-y-2.5">
+              <li class="flex gap-2 items-start"><span class="font-bold text-cyan-700 w-10 shrink-0 text-right mt-[1px]">07:00</span><span class="leading-relaxed">베셀 캄파나 호텔 조식 뷔페 (마지막 카이센동)</span></li>
+              <li class="flex gap-2 items-start"><span class="font-bold text-cyan-700 w-10 shrink-0 text-right mt-[1px]">08:30</span><span class="leading-relaxed">체크아웃 후 삿포로역으로 이동</span></li>
+              <li class="flex gap-2 items-start"><span class="font-bold text-cyan-700 w-10 shrink-0 text-right mt-[1px]">08:45</span><span class="leading-relaxed">JR 쾌속 에어포트 탑승 및 공항 이동</span></li>
             </ul>
           </div>
-          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 space-y-2">
-            <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">공항 수속 & 귀국</span>
-            <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
-              <li>• <strong>[필수] 위탁 수하물 처리 전에 세관 확인 절차 진행</strong>. 환급 대상·환급액은 매장 및 구매 조건에 따라 달라짐</li>
-              <li>• 위탁 수하물 위탁 및 출국 심사</li>
-              <li>• 귀국편 실제 출발 시각과 항공사 수속 마감 시간을 확인해 공항 도착·JR 시간을 역산. 현재 12:00~13:00는 가정값이며, 특히 12:00 전후 항공편이면 08:45 열차 가안보다 이른 이동편이 필요한지 확인</li>
+          <div class="bg-slate-50/80 p-3.5 rounded-xl border border-slate-100 space-y-3">
+            <span class="inline-block text-[11px] font-bold text-slate-500 uppercase tracking-wide">수속 (수하물 및 귀국)</span>
+            <ul class="text-xs text-slate-600 space-y-2.5">
+              <li class="flex gap-2 items-start"><span class="font-bold text-cyan-700 w-10 shrink-0 text-right mt-[1px]">09:40</span><span class="leading-relaxed">신치토세 공항 도착</span></li>
+              <li class="flex gap-2 items-start"><span class="font-bold text-cyan-700 w-10 shrink-0 text-right mt-[1px]">10:00</span><span class="leading-relaxed text-rose-600 font-bold">세관 텍스리펀 큐알 스캔 (위탁수하물 부치기 전 필수)</span></li>
+              <li class="flex gap-2 items-start"><span class="font-bold text-cyan-700 w-10 shrink-0 text-right mt-[1px]">10:30</span><span class="leading-relaxed">수하물 위탁 및 출국 심사 후 귀국편(12:30경) 탑승</span></li>
             </ul>
           </div>
         </div>
